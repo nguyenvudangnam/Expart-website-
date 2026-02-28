@@ -1,0 +1,68 @@
+---
+// PainPoints.astro - Expat pain points section
+const painPoints = [
+  {
+    icon: '📄',
+    title: 'Your landlord wants you to sign a contract you can\'t read',
+    description: 'Vietnamese lease agreements often contain clauses that heavily favor the landlord. One wrong signature and you\'re locked in.',
+  },
+  {
+    icon: '🛂',
+    title: 'Your visa is expiring and you don\'t know your options',
+    description: 'Overstaying or taking the wrong visa path can result in fines, bans, or forced exits. The rules change constantly.',
+  },
+  {
+    icon: '💼',
+    title: 'You want to start a business but the paperwork is overwhelming',
+    description: 'LLC? Representative office? Work permit? Each path has different requirements, costs, and hidden complications.',
+  },
+  {
+    icon: '🔍',
+    title: 'Google gives you outdated forum posts, not real answers',
+    description: 'Vietnam\'s regulations update frequently. That 2019 Expat forum post may be dangerously wrong today.',
+  },
+];
+---
+
+<section id="pain-points" class="section-spacing bg-white border-b border-[#E5E7EB]">
+  <div class="container-page">
+
+    <!-- Section header -->
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <h2 class="font-heading text-3xl md:text-4xl font-bold text-[#1B3A5C] mb-4">
+        Sound familiar?
+      </h2>
+      <p class="text-[#6B7280] text-lg">
+        Every expat hits these walls. The difference is whether you navigate them alone — or with someone who knows the system.
+      </p>
+    </div>
+
+    <!-- Pain point grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      {painPoints.map(point => (
+        <div class="flex gap-4 p-6 rounded-xl border border-[#E5E7EB] bg-[#FAFAF8] hover:border-[#1B3A5C]/30 transition-all duration-200">
+          <span class="text-2xl shrink-0 mt-0.5" aria-hidden="true">{point.icon}</span>
+          <div>
+            <h3 class="font-heading font-semibold text-[#1B3A5C] text-base mb-1.5 leading-snug">
+              {point.title}
+            </h3>
+            <p class="text-[#6B7280] text-sm leading-relaxed">
+              {point.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Mid-page CTA -->
+    <div class="text-center mt-10">
+      <p class="text-[#6B7280] mb-4">Need help now? Don't wait until it's a crisis.</p>
+      <a
+        href="/book"
+        class="inline-flex items-center gap-2 bg-[#1B3A5C] text-white font-semibold px-6 py-3 rounded-lg hover:bg-navy-800 transition-all duration-200 shadow-sm hover:shadow-md"
+      >
+        Book a Consultation →
+      </a>
+    </div>
+  </div>
+</section>

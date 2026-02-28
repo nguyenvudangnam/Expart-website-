@@ -1,0 +1,38 @@
+---
+// CtaBar.astro - Sticky bottom CTA bar for mobile (hidden on desktop)
+---
+
+<div
+  id="cta-bar"
+  class="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-[#1B3A5C] border-t border-white/10 shadow-lg"
+  aria-label="Book a consultation"
+>
+  <div class="flex items-center justify-between px-4 py-3 gap-3">
+    <p class="text-white text-sm font-medium leading-tight">
+      Need help? <span class="text-[#E8913A]">Book a 60-min call</span>
+    </p>
+    <a
+      href="/book"
+      class="shrink-0 bg-[#E8913A] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-amber-500 transition-all duration-200"
+    >
+      Book Now →
+    </a>
+  </div>
+</div>
+
+<!-- Spacer so content doesn't hide behind sticky bar on mobile -->
+<div class="h-[60px] md:hidden" aria-hidden="true"></div>
+
+<script>
+  // Hide CTA bar when user scrolls near top (they can see the nav CTA)
+  const ctaBar = document.getElementById('cta-bar');
+  if (ctaBar) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY < 100) {
+        ctaBar.classList.add('opacity-0', 'pointer-events-none');
+      } else {
+        ctaBar.classList.remove('opacity-0', 'pointer-events-none');
+      }
+    }, { passive: true });
+  }
+</script>

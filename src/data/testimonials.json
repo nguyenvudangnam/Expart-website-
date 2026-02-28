@@ -1,0 +1,29 @@
+{
+  "enabled": false,
+  "items": [
+    {
+      "id": 1,
+      "name": "James R.",
+      "country": "Australia",
+      "role": "Business Owner",
+      "text": "I was completely lost navigating Vietnamese business registration. The consultation saved me weeks of confusion and potential costly mistakes.",
+      "rating": 5
+    },
+    {
+      "id": 2,
+      "name": "Sarah M.",
+      "country": "United Kingdom",
+      "role": "Expat Spouse",
+      "text": "Getting our family visa situation sorted was so stressful until we booked a call. Clear, honest advice in plain English. Highly recommend.",
+      "rating": 5
+    },
+    {
+      "id": 3,
+      "name": "David K.",
+      "country": "United States",
+      "role": "Digital Nomad",
+      "text": "Finally found someone who could explain the visa options without the jargon. Worth every dollar.",
+      "rating": 5
+    }
+  ]
+}

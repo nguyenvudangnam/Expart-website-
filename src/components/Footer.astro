@@ -1,0 +1,84 @@
+---
+// Footer.astro - Site footer with links and disclaimer
+
+const currentYear = new Date().getFullYear();
+
+const footerLinks = {
+  guides: [
+    { href: '/renting', label: 'Renting in Vietnam' },
+    { href: '/visa', label: 'Visa Options' },
+    { href: '/business', label: 'Starting a Business' },
+    { href: '/family', label: 'Family & Registration' },
+    { href: '/documents', label: 'Documents & Notarization' },
+  ],
+  services: [
+    { href: '/how-it-works', label: 'How It Works' },
+    { href: '/book', label: 'Book a Consultation' },
+    { href: '/about', label: 'About' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/resources', label: 'Free Resources' },
+  ],
+};
+---
+
+<footer class="bg-[#1B3A5C] text-white" aria-label="Site footer">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+      <!-- Brand column -->
+      <div class="md:col-span-1">
+        <a href="/" class="flex items-center gap-2 font-heading font-semibold text-lg mb-4">
+          <span class="text-[#E8913A]">⚖</span>
+          <span>Expat Legal <span class="text-[#E8913A]">Vietnam</span></span>
+        </a>
+        <p class="text-white/60 text-sm leading-relaxed max-w-xs">
+          Plain-English legal guidance for expats navigating Vietnam's system. Book a call and get clarity, fast.
+        </p>
+        <a
+          href="/book"
+          class="inline-flex mt-6 items-center gap-2 bg-[#E8913A] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-amber-500 transition-all duration-200"
+        >
+          Book a Call →
+        </a>
+      </div>
+
+      <!-- Guides links -->
+      <div>
+        <h3 class="font-semibold text-sm uppercase tracking-widest text-white/40 mb-4">Free Guides</h3>
+        <ul class="flex flex-col gap-2.5">
+          {footerLinks.guides.map(link => (
+            <li>
+              <a href={link.href} class="text-white/70 text-sm hover:text-[#E8913A] transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Services links -->
+      <div>
+        <h3 class="font-semibold text-sm uppercase tracking-widest text-white/40 mb-4">Services</h3>
+        <ul class="flex flex-col gap-2.5">
+          {footerLinks.services.map(link => (
+            <li>
+              <a href={link.href} class="text-white/70 text-sm hover:text-[#E8913A] transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Divider + bottom bar -->
+    <div class="border-t border-white/10 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-white/40 text-xs">
+        &copy; {currentYear} Expat Legal Vietnam. All rights reserved.
+      </p>
+      <p class="text-white/30 text-xs text-center md:text-right max-w-md">
+        This site provides general legal information, not legal advice. For formal representation, consult a licensed Vietnamese attorney.
+      </p>
+    </div>
+  </div>
+</footer>

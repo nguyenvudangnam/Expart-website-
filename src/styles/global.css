@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/* =============================================
+   DESIGN TOKENS - Custom colors & typography
+   ============================================= */
+@theme {
+  /* Brand colors */
+  --color-navy: #1B3A5C;
+  --color-amber: #E8913A;
+  --color-surface: #FFFFFF;
+  --color-background: #FAFAF8;
+  --color-text-primary: #2D2D2D;
+  --color-text-muted: #6B7280;
+  --color-success: #059669;
+  --color-border: #E5E7EB;
+
+  /* Font families */
+  --font-heading: 'Source Serif 4', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* =============================================
+   BASE STYLES
+   ============================================= */
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-body);
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+}
+
+/* =============================================
+   UTILITY CLASSES
+   ============================================= */
+.container-reading {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.container-page {
+  max-width: 1152px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.section-spacing {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 1024px) {
+  .section-spacing {
+    padding-top: 7.5rem;
+    padding-bottom: 7.5rem;
+  }
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 2px;
+}

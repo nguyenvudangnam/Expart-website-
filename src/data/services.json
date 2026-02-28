@@ -1,0 +1,70 @@
+{
+  "pricing": [
+    {
+      "id": "consultation",
+      "name": "Single Consultation",
+      "price": 150,
+      "currency": "USD",
+      "duration": "60 min",
+      "description": "One focused session on your specific legal question.",
+      "features": [
+        "60-minute video or voice call",
+        "Written summary of key action points",
+        "Follow-up Q&A via email (48h)",
+        "Resource links & document checklist"
+      ],
+      "cta": "Book a Call",
+      "highlighted": false
+    },
+    {
+      "id": "package",
+      "name": "Expat Setup Package",
+      "price": 400,
+      "currency": "USD",
+      "duration": "3 sessions",
+      "description": "Full hand-holding for new expats settling in Vietnam.",
+      "features": [
+        "3 × 60-minute consultations",
+        "Visa strategy & renewals",
+        "Apartment contract review",
+        "Business or work permit guidance",
+        "Priority booking (24h response)",
+        "30-day email support"
+      ],
+      "cta": "Get the Package",
+      "highlighted": true
+    }
+  ],
+  "pillar_pages": [
+    {
+      "slug": "renting",
+      "title": "Renting in Vietnam",
+      "description": "Apartment contracts, tenant rights, and how to avoid common scams.",
+      "icon": "🏠"
+    },
+    {
+      "slug": "visa",
+      "title": "Visa Options",
+      "description": "E-visa, business visa, DT visa, and long-term residency paths.",
+      "icon": "🛂"
+    },
+    {
+      "slug": "business",
+      "title": "Starting a Business",
+      "description": "LLC setup, representative office, and work permit requirements.",
+      "icon": "💼"
+    },
+    {
+      "slug": "family",
+      "title": "Family & Registration",
+      "description": "Dependent visas, marriage registration, and household registration.",
+      "icon": "👨‍👩‍👧"
+    },
+    {
+      "slug": "documents",
+      "title": "Documents & Notarization",
+      "description": "Apostille, translation, and document legalization in Vietnam.",
+      "icon": "📄"
+    }
+  ]
+}

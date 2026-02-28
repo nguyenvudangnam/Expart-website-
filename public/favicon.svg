@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="8" fill="#1B3A5C"/>
+  <!-- Simple scale of justice icon -->
+  <rect x="15" y="7" width="2" height="16" fill="#E8913A" rx="1"/>
+  <rect x="9" y="7" width="14" height="2" fill="#E8913A" rx="1"/>
+  <rect x="11" y="22" width="10" height="2" fill="#E8913A" rx="1"/>
+  <!-- Left pan -->
+  <circle cx="10" cy="14" r="2.5" fill="none" stroke="#E8913A" stroke-width="1.5"/>
+  <!-- Right pan -->
+  <circle cx="22" cy="14" r="2.5" fill="none" stroke="#E8913A" stroke-width="1.5"/>
+</svg>
