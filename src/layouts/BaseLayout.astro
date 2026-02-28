@@ -1,12 +1,15 @@
 ---
-// BaseLayout.astro - HTML head, fonts, analytics placeholder
+// BaseLayout.astro - HTML head, fonts, SEO, i18n support
 import '../styles/global.css';
+import { getLocaleFromUrl, t, localizedUrl } from '../i18n/utils';
+import { locales, localeTags, type Locale } from '../i18n/config';
 
 interface Props {
   title: string;
   description: string;
   ogImage?: string;
   canonicalURL?: string;
+  locale?: Locale;
 }
 
 const {
@@ -14,14 +17,28 @@ const {
   description,
   ogImage = '/og-image.png',
   canonicalURL = Astro.url.href,
+  locale: localeProp,
 } = Astro.props;
 
-const siteName = 'Expat Legal Vietnam';
+const locale = localeProp ?? getLocaleFromUrl(Astro.url);
+const siteName = t(locale, 'site.name');
 const fullTitle = `${title} | ${siteName}`;
+const langTag = localeTags[locale];
+
+// Compute current path without locale prefix for hreflang
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
+const firstSeg = pathSegments[0];
+const isLocalePrefix = locales.includes(firstSeg as Locale) && firstSeg !== 'en';
+const basePath = isLocalePrefix ? '/' + pathSegments.slice(1).join('/') : Astro.url.pathname;
+const cleanBasePath = basePath === '' ? '/' : basePath;
+
+// CJK font loading
+const needsCJK = locale === 'ko' || locale === 'zh';
+const needsCyrillic = locale === 'ru';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={langTag}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,6 +49,16 @@ const fullTitle = `${title} | ${siteName}`;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
 
+    <!-- Hreflang tags for all locales -->
+    {locales.map(loc => (
+      <link
+        rel="alternate"
+        hreflang={localeTags[loc]}
+        href={new URL(localizedUrl(loc, cleanBasePath), Astro.site)}
+      />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={new URL(cleanBasePath, Astro.site)} />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
@@ -39,6 +66,7 @@ const fullTitle = `${title} | ${siteName}`;
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(ogImage, Astro.site)} />
     <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content={langTag} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -62,7 +90,23 @@ const fullTitle = `${title} | ${siteName}`;
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap"
     />
 
-    <!-- Analytics placeholder (add your script here) -->
+    {/* CJK fonts for Korean & Chinese */}
+    {needsCJK && (
+      <link
+        rel="stylesheet"
+        href={`https://fonts.googleapis.com/css2?family=Noto+Sans+${locale === 'ko' ? 'KR' : 'SC'}:wght@400;500;600;700&display=swap`}
+      />
+    )}
+
+    {/* Cyrillic font for Russian */}
+    {needsCyrillic && (
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&subset=cyrillic&display=swap"
+      />
+    )}
+
+    <!-- Analytics placeholder -->
     <!-- <script defer src="https://your-analytics.com/script.js"></script> -->
   </head>
   <body>

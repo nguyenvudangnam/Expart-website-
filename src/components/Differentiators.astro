@@ -1,31 +1,38 @@
 ---
 // Differentiators.astro - Premium why-us section with rich depth
+import { t, getLocaleFromUrl, localizedUrl } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
 import servicesData from '../data/services.json';
+
+interface Props { locale?: Locale; }
+const locale = Astro.props.locale ?? getLocaleFromUrl(Astro.url);
 
 const { pillar_pages } = servicesData;
 
 const differentiators = [
   {
     icon: '🇬🇧',
-    title: 'Entirely in English',
-    description: 'Every consultation, every written summary, every follow-up — in plain English. No language barrier.',
+    title: t(locale, 'diff.0.title'),
+    description: t(locale, 'diff.0.desc'),
   },
   {
     icon: '⚡',
-    title: 'Specific to your situation',
-    description: 'Not generic advice. We talk through your exact circumstances and give you a clear action plan.',
+    title: t(locale, 'diff.1.title'),
+    description: t(locale, 'diff.1.desc'),
   },
   {
     icon: '📅',
-    title: 'Available within days',
-    description: 'Book online and get a slot within 2-3 business days. Urgent cases prioritized.',
+    title: t(locale, 'diff.2.title'),
+    description: t(locale, 'diff.2.desc'),
   },
   {
     icon: '🔄',
-    title: 'Always up to date',
-    description: 'Vietnamese regulations change. Our guidance is current — not pulled from a 2019 forum post.',
+    title: t(locale, 'diff.3.title'),
+    description: t(locale, 'diff.3.desc'),
   },
 ];
+
+const pillarPageKeys = ['renting', 'visa', 'business', 'family', 'documents'] as const;
 ---
 
 <!-- Differentiators section -->
@@ -41,10 +48,10 @@ const differentiators = [
       <div class="text-center max-w-2xl mx-auto mb-14">
         <div class="divider-gold mx-auto mb-6"></div>
         <h2 class="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
-          Why expats choose us
+          {t(locale, 'diff.title')}
         </h2>
         <p class="text-white/50 text-lg leading-relaxed">
-          When you're dealing with legal issues in a foreign country, you need more than a Google search.
+          {t(locale, 'diff.subtitle')}
         </p>
       </div>
 
@@ -75,17 +82,17 @@ const differentiators = [
         <div class="text-center max-w-2xl mx-auto mb-10">
           <div class="divider-gold mx-auto mb-6"></div>
           <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">
-            Free guides for common situations
+            {t(locale, 'diff.guidesTitle')}
           </h2>
           <p class="text-white/50">
-            Start here. If you need more, book a call.
+            {t(locale, 'diff.guidesSubtitle')}
           </p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
           {pillar_pages.map((page, i) => (
             <a
-              href={`/${page.slug}`}
+              href={localizedUrl(locale, `/${page.slug}`)}
               class="group relative flex items-start gap-4 p-5 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] hover:border-gold/25 transition-all duration-300"
             >
               <!-- Guide icon -->
@@ -94,10 +101,10 @@ const differentiators = [
               </span>
               <div>
                 <h3 class="font-heading font-semibold text-white text-sm mb-1.5 group-hover:text-gold-bright transition-colors duration-300">
-                  {page.title}
+                  {t(locale, `pillarPages.${pillarPageKeys[i]}.title`)}
                 </h3>
                 <p class="text-white/35 text-xs leading-relaxed group-hover:text-white/50 transition-colors duration-300">
-                  {page.description}
+                  {t(locale, `pillarPages.${pillarPageKeys[i]}.desc`)}
                 </p>
               </div>
               <!-- Arrow -->

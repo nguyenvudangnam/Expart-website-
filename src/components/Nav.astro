@@ -1,12 +1,22 @@
 ---
-// Nav.astro - Premium glassmorphism navigation
+// Nav.astro - Premium glassmorphism navigation (i18n-aware)
+import { t, getLocaleFromUrl, localizedUrl } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+interface Props {
+  locale?: Locale;
+}
+
+const locale = Astro.props.locale ?? getLocaleFromUrl(Astro.url);
+
 const navLinks = [
-  { href: '/renting', label: 'Renting' },
-  { href: '/visa', label: 'Visa' },
-  { href: '/business', label: 'Business' },
-  { href: '/family', label: 'Family' },
-  { href: '/documents', label: 'Documents' },
-  { href: '/how-it-works', label: 'How It Works' },
+  { href: '/renting', labelKey: 'nav.renting' },
+  { href: '/visa', labelKey: 'nav.visa' },
+  { href: '/business', labelKey: 'nav.business' },
+  { href: '/family', labelKey: 'nav.family' },
+  { href: '/documents', labelKey: 'nav.documents' },
+  { href: '/how-it-works', labelKey: 'nav.howItWorks' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -23,7 +33,7 @@ const currentPath = Astro.url.pathname;
     <div class="flex items-center justify-between h-[4.25rem]">
 
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-2.5 group">
+      <a href={localizedUrl(locale, '/')} class="flex items-center gap-2.5 group">
         <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-gold to-gold-bright text-white text-sm font-bold shadow-[0_2px_10px_rgba(200,148,74,0.3)]">⚖</span>
         <span class="font-heading font-semibold text-lg text-white tracking-tight">
           Expat Legal <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-bright">Vietnam</span>
@@ -32,31 +42,37 @@ const currentPath = Astro.url.pathname;
 
       <!-- Desktop nav links -->
       <div class="hidden lg:flex items-center gap-1">
-        {navLinks.map(link => (
-          <a
-            href={link.href}
-            class:list={[
-              'relative text-sm font-medium px-3 py-2 rounded-lg transition-all duration-200',
-              currentPath === link.href
-                ? 'text-gold bg-white/[0.06]'
-                : 'text-white/60 hover:text-white hover:bg-white/[0.04]',
-            ]}
-          >
-            {link.label}
-            {currentPath === link.href && (
-              <span class="absolute bottom-0 left-3 right-3 h-[2px] bg-gradient-to-r from-gold to-gold-bright rounded-full"></span>
-            )}
-          </a>
-        ))}
+        {navLinks.map(link => {
+          const href = localizedUrl(locale, link.href);
+          return (
+            <a
+              href={href}
+              class:list={[
+                'relative text-sm font-medium px-3 py-2 rounded-lg transition-all duration-200',
+                currentPath === href
+                  ? 'text-gold bg-white/[0.06]'
+                  : 'text-white/60 hover:text-white hover:bg-white/[0.04]',
+              ]}
+            >
+              {t(locale, link.labelKey)}
+              {currentPath === href && (
+                <span class="absolute bottom-0 left-3 right-3 h-[2px] bg-gradient-to-r from-gold to-gold-bright rounded-full"></span>
+              )}
+            </a>
+          );
+        })}
       </div>
 
-      <!-- Desktop CTA button -->
-      <a
-        href="/book"
-        class="hidden lg:inline-flex items-center gap-2 btn-gold text-white text-sm font-semibold px-5 py-2.5 rounded-lg"
-      >
-        Book a Call
-      </a>
+      <!-- Desktop: Language switcher + CTA -->
+      <div class="hidden lg:flex items-center gap-3">
+        <LanguageSwitcher locale={locale} />
+        <a
+          href={localizedUrl(locale, '/book')}
+          class="inline-flex items-center gap-2 btn-gold text-white text-sm font-semibold px-5 py-2.5 rounded-lg"
+        >
+          {t(locale, 'nav.bookCall')}
+        </a>
+      </div>
 
       <!-- Mobile hamburger button -->
       <button
@@ -79,25 +95,30 @@ const currentPath = Astro.url.pathname;
     >
       <div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-3"></div>
       <div class="flex flex-col gap-1">
-        {navLinks.map(link => (
-          <a
-            href={link.href}
-            class:list={[
-              'px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200',
-              currentPath === link.href
-                ? 'text-gold bg-white/[0.08] border-l-2 border-gold'
-                : 'text-white/60 hover:text-white hover:bg-white/[0.04]',
-            ]}
-          >
-            {link.label}
-          </a>
-        ))}
+        {navLinks.map(link => {
+          const href = localizedUrl(locale, link.href);
+          return (
+            <a
+              href={href}
+              class:list={[
+                'px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200',
+                currentPath === href
+                  ? 'text-gold bg-white/[0.08] border-l-2 border-gold'
+                  : 'text-white/60 hover:text-white hover:bg-white/[0.04]',
+              ]}
+            >
+              {t(locale, link.labelKey)}
+            </a>
+          );
+        })}
+        <div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-2"></div>
+        <LanguageSwitcher locale={locale} mobile />
         <div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-2"></div>
         <a
-          href="/book"
+          href={localizedUrl(locale, '/book')}
           class="flex items-center justify-center gap-2 btn-gold text-white text-sm font-semibold px-4 py-3.5 rounded-lg"
         >
-          Book a Call →
+          {t(locale, 'nav.bookCall')} →
         </a>
       </div>
     </div>

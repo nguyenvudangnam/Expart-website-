@@ -1,0 +1,125 @@
+---
+// [locale]/renting.astro - Localized renting pillar page
+import PillarLayout from '../../layouts/PillarLayout.astro';
+import { getNonDefaultLocales, t } from '../../i18n/utils';
+import type { Locale } from '../../i18n/config';
+
+export function getStaticPaths() {
+  return getNonDefaultLocales().map(locale => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
+
+const headings = [
+  { id: 'overview', text: 'Overview', depth: 2 },
+  { id: 'finding-apartment', text: 'Finding an Apartment', depth: 2 },
+  { id: 'where-to-search', text: 'Where to Search', depth: 3 },
+  { id: 'typical-costs', text: 'Typical Costs', depth: 3 },
+  { id: 'the-lease-contract', text: 'The Lease Contract', depth: 2 },
+  { id: 'key-clauses', text: 'Key Clauses to Watch', depth: 3 },
+  { id: 'red-flags', text: 'Red Flags', depth: 3 },
+  { id: 'deposits-and-payments', text: 'Deposits & Payments', depth: 2 },
+  { id: 'your-rights', text: 'Your Rights as a Tenant', depth: 2 },
+  { id: 'common-disputes', text: 'Common Disputes', depth: 2 },
+  { id: 'when-to-get-help', text: 'When to Get Professional Help', depth: 2 },
+];
+---
+
+<PillarLayout
+  title={t(locale, 'pillarPages.renting.title')}
+  description={t(locale, 'pillarPages.renting.desc')}
+  lastUpdated="February 2026"
+  breadcrumbLabel={t(locale, 'pillarPages.renting.title')}
+  headings={headings}
+  currentSlug="renting"
+  locale={locale}
+  leadMagnet={{
+    title: t(locale, 'resources.0.title'),
+    description: t(locale, 'resources.0.desc'),
+  }}
+>
+  <!-- Content remains in English for now — will be translated in Phase 3-5 -->
+  <h2 id="overview">Overview</h2>
+  <p>Renting an apartment in Vietnam as an expat is one of the first — and most stressful — things you'll do. The market moves fast, contracts are in Vietnamese, and landlord-tenant norms are very different from what you're used to back home.</p>
+  <p>This guide covers the entire process: from finding a place, to understanding your lease, to knowing your rights when things go wrong. It's written for expats in Ho Chi Minh City and Hanoi, but the legal principles apply nationwide.</p>
+
+  <h2 id="finding-apartment">Finding an Apartment</h2>
+  <p>The Vietnamese rental market operates differently from Western markets. Most expats find housing through a combination of Facebook groups, local agents, and word-of-mouth. Here's what actually works.</p>
+
+  <h3 id="where-to-search">Where to Search</h3>
+  <ul>
+    <li><strong>Facebook groups</strong> — The primary channel. Search for "Ho Chi Minh City apartments for rent" or "Hanoi expat housing." Be cautious of scam listings with prices that seem too good.</li>
+    <li><strong>Local agents</strong> — Agents typically charge one month's rent as commission. Good ones save you time; bad ones waste it. Get referrals from other expats.</li>
+    <li><strong>Walking around</strong> — In popular expat areas (Thao Dien, District 7 in HCMC; Tay Ho in Hanoi), many buildings have "For Rent" signs. This cuts out the agent fee.</li>
+    <li><strong>Property apps</strong> — Batdongsan.com.vn is the largest, but listings are mostly in Vietnamese. Use it for price benchmarking.</li>
+  </ul>
+
+  <h3 id="typical-costs">Typical Costs</h3>
+  <p>Rental prices vary dramatically by city, district, and building quality. Here's a rough guide for 2024-2025:</p>
+  <ul>
+    <li><strong>Studio/1BR in HCMC</strong> — $400-$800/month in expat-friendly areas</li>
+    <li><strong>2BR apartment in HCMC</strong> — $700-$1,500/month depending on district</li>
+    <li><strong>Serviced apartment</strong> — $800-$2,000/month (furnished, includes cleaning)</li>
+    <li><strong>Hanoi</strong> — Generally 15-25% cheaper than HCMC for comparable quality</li>
+  </ul>
+  <p>On top of rent, budget for: electricity ($50-$150/month depending on AC usage), water ($5-$15/month), internet ($10-$20/month), and building management fees ($30-$100/month in newer buildings).</p>
+
+  <h2 id="the-lease-contract">The Lease Contract</h2>
+  <p>This is where most expats get into trouble. Vietnamese lease agreements heavily favor the landlord by default, and most landlords won't volunteer to change terms unless you push back.</p>
+
+  <h3 id="key-clauses">Key Clauses to Watch</h3>
+  <ol>
+    <li><strong>Term and renewal</strong> — Most leases are 12 months. Clarify whether the price is locked at renewal or subject to increase. Get a cap in writing (e.g., "max 5% increase per year").</li>
+    <li><strong>Early termination</strong> — What happens if you need to leave before the lease ends? Many contracts require 2-3 months' notice AND forfeiture of your deposit. Negotiate a fair penalty.</li>
+    <li><strong>Deposit return conditions</strong> — The contract should list specific conditions for getting your deposit back. "Normal wear and tear" should be explicitly acceptable.</li>
+    <li><strong>Maintenance responsibility</strong> — Who pays for AC repairs? Water heater issues? Clarify items over a certain cost threshold (e.g., landlord covers anything over 500,000 VND).</li>
+    <li><strong>Subleasing and guests</strong> — Some contracts restrict overnight guests or prohibit Airbnb. Know the terms before signing.</li>
+  </ol>
+
+  <h3 id="red-flags">Red Flags</h3>
+  <ul>
+    <li>Landlord refuses to provide a bilingual (Vietnamese-English) contract</li>
+    <li>No clear deposit return clause</li>
+    <li>Electricity charged above government rates (this is actually illegal)</li>
+    <li>No receipts for monthly payments</li>
+    <li>Landlord wants cash only with no paper trail</li>
+  </ul>
+
+  <h2 id="deposits-and-payments">Deposits & Payments</h2>
+  <p>The standard deposit is <strong>2 months' rent</strong>, paid upfront along with the first month. Some landlords ask for 3 months. Always get a written receipt for every payment.</p>
+  <p>Under Vietnamese law, the deposit must be returned within 30 days of lease end, minus legitimate deductions for damage. In practice, deposit disputes are the #1 complaint among expat renters.</p>
+  <p><strong>Pro tip:</strong> Take photos/video of the apartment condition on move-in day and email them to the landlord as a timestamped record. This is your best protection for getting the deposit back.</p>
+
+  <h2 id="your-rights">Your Rights as a Tenant</h2>
+  <p>Vietnamese tenancy law (Civil Code 2015, Chapter XV) gives tenants certain protections that many landlords — and expats — don't know about:</p>
+  <ul>
+    <li><strong>Right to quiet enjoyment</strong> — The landlord cannot enter without reasonable notice (typically 24 hours).</li>
+    <li><strong>Fair electricity pricing</strong> — Landlords cannot charge above the government electricity rate. If they do, you can report this to local authorities.</li>
+    <li><strong>Habitable conditions</strong> — The landlord must maintain the property in livable condition. Major structural and plumbing issues are the landlord's responsibility.</li>
+    <li><strong>Contract enforcement</strong> — A signed contract is legally binding. The landlord cannot unilaterally change terms mid-lease.</li>
+  </ul>
+
+  <h2 id="common-disputes">Common Disputes</h2>
+  <p>After years of helping expats with rental issues, these are the most common problems:</p>
+  <ol>
+    <li><strong>Deposit not returned</strong> — Landlord claims "damage" that was pre-existing or normal wear. Solution: move-in documentation + bilingual contract with clear terms.</li>
+    <li><strong>Unexpected rent increases</strong> — Landlord raises rent significantly at renewal. Solution: cap renewal increases in the original contract.</li>
+    <li><strong>Electricity overcharging</strong> — Paying 4,000-5,000 VND/kWh instead of the government rate (~2,000-3,500 VND). Solution: request a separate electricity meter or negotiate in the contract.</li>
+    <li><strong>Landlord selling the property</strong> — The new owner may not honor your lease. Vietnamese law technically protects you, but enforcement is difficult.</li>
+  </ol>
+
+  <h2 id="when-to-get-help">When to Get Professional Help</h2>
+  <p>You should consider professional legal guidance when:</p>
+  <ul>
+    <li>You're signing a lease over $1,000/month and want a contract review</li>
+    <li>The landlord is withholding your deposit without justification</li>
+    <li>You're being overcharged for utilities and the landlord won't correct it</li>
+    <li>You need to break a lease early and want to minimize financial damage</li>
+    <li>You're renting commercial property for a business</li>
+  </ul>
+  <p>A 60-minute consultation can save you thousands of dollars in rental mistakes. It's especially worth it for your first apartment in Vietnam, when you don't yet know what "normal" looks like here.</p>
+
+</PillarLayout>

@@ -1,16 +1,21 @@
 ---
 // Breadcrumb.astro - Premium navigation breadcrumb
+import { t, getLocaleFromUrl, localizedUrl } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+
 interface Props {
+  locale?: Locale;
   items: { label: string; href?: string }[];
 }
 
+const locale = Astro.props.locale ?? getLocaleFromUrl(Astro.url);
 const { items } = Astro.props;
 ---
 
 <nav class="text-sm text-text-muted mb-6" aria-label="Breadcrumb">
   <ol class="flex flex-wrap items-center gap-1.5">
     <li>
-      <a href="/" class="hover:text-navy transition-colors">Home</a>
+      <a href={localizedUrl(locale, '/')} class="hover:text-navy transition-colors">{t(locale, 'breadcrumb.home')}</a>
     </li>
     {items.map((item, i) => (
       <li class="flex items-center gap-1.5">

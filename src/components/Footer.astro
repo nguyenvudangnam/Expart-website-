@@ -1,22 +1,27 @@
 ---
 // Footer.astro - Premium footer with new palette
+import { t, getLocaleFromUrl, localizedUrl } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+
+interface Props { locale?: Locale; }
+const locale = Astro.props.locale ?? getLocaleFromUrl(Astro.url);
 
 const currentYear = new Date().getFullYear();
 
 const footerLinks = {
   guides: [
-    { href: '/renting', label: 'Renting in Vietnam' },
-    { href: '/visa', label: 'Visa Options' },
-    { href: '/business', label: 'Starting a Business' },
-    { href: '/family', label: 'Family & Registration' },
-    { href: '/documents', label: 'Documents & Notarization' },
+    { href: localizedUrl(locale, '/renting'), label: t(locale, 'pillarPages.renting.title') },
+    { href: localizedUrl(locale, '/visa'), label: t(locale, 'pillarPages.visa.title') },
+    { href: localizedUrl(locale, '/business'), label: t(locale, 'pillarPages.business.title') },
+    { href: localizedUrl(locale, '/family'), label: t(locale, 'pillarPages.family.title') },
+    { href: localizedUrl(locale, '/documents'), label: t(locale, 'pillarPages.documents.title') },
   ],
   services: [
-    { href: '/how-it-works', label: 'How It Works' },
-    { href: '/book', label: 'Book a Consultation' },
-    { href: '/about', label: 'About' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/resources', label: 'Free Resources' },
+    { href: localizedUrl(locale, '/how-it-works'), label: t(locale, 'howItWorks.title') },
+    { href: localizedUrl(locale, '/book'), label: t(locale, 'nav.bookCall') },
+    { href: localizedUrl(locale, '/about'), label: t(locale, 'about.title') },
+    { href: localizedUrl(locale, '/blog'), label: t(locale, 'blog.title') },
+    { href: localizedUrl(locale, '/resources'), label: t(locale, 'resources.title') },
   ],
 };
 ---
@@ -32,26 +37,26 @@ const footerLinks = {
 
       <!-- Brand column -->
       <div class="md:col-span-1">
-        <a href="/" class="flex items-center gap-2.5 mb-4 group">
+        <a href={localizedUrl(locale, '/')} class="flex items-center gap-2.5 mb-4 group">
           <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-gold to-gold-bright text-white text-sm font-bold shadow-[0_2px_10px_rgba(200,148,74,0.3)]">⚖</span>
           <span class="font-heading font-semibold text-lg text-white">
             Expat Legal <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-bright">Vietnam</span>
           </span>
         </a>
         <p class="text-white/45 text-sm leading-relaxed max-w-xs">
-          Plain-English legal guidance for expats navigating Vietnam's system. Book a call and get clarity, fast.
+          {t(locale, 'footer.brandDesc')}
         </p>
         <a
-          href="/book"
+          href={localizedUrl(locale, '/book')}
           class="inline-flex mt-6 items-center gap-2 btn-gold text-white text-sm font-semibold px-5 py-2.5 rounded-lg"
         >
-          Book a Call →
+          {t(locale, 'footer.bookCall')}
         </a>
       </div>
 
       <!-- Guides links -->
       <div>
-        <h3 class="font-semibold text-xs uppercase tracking-[0.2em] text-gold/60 mb-5">Free Guides</h3>
+        <h3 class="font-semibold text-xs uppercase tracking-[0.2em] text-gold/60 mb-5">{t(locale, 'footer.guidesTitle')}</h3>
         <ul class="flex flex-col gap-3">
           {footerLinks.guides.map(link => (
             <li>
@@ -65,7 +70,7 @@ const footerLinks = {
 
       <!-- Services links -->
       <div>
-        <h3 class="font-semibold text-xs uppercase tracking-[0.2em] text-gold/60 mb-5">Services</h3>
+        <h3 class="font-semibold text-xs uppercase tracking-[0.2em] text-gold/60 mb-5">{t(locale, 'footer.servicesTitle')}</h3>
         <ul class="flex flex-col gap-3">
           {footerLinks.services.map(link => (
             <li>
@@ -81,10 +86,10 @@ const footerLinks = {
     <!-- Divider + bottom bar -->
     <div class="border-t border-white/[0.06] mt-12 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
       <p class="text-white/30 text-xs">
-        &copy; {currentYear} Expat Legal Vietnam. All rights reserved.
+        {t(locale, 'footer.copyright').replace('{year}', String(currentYear))}
       </p>
       <p class="text-white/20 text-xs text-center md:text-right max-w-md">
-        This site provides general legal information, not legal advice. For formal representation, consult a licensed Vietnamese attorney.
+        {t(locale, 'footer.disclaimer')}
       </p>
     </div>
   </div>

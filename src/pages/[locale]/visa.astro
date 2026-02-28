@@ -1,0 +1,161 @@
+---
+// [locale]/visa.astro - Localized visa pillar page
+import PillarLayout from '../../layouts/PillarLayout.astro';
+import { getNonDefaultLocales, t } from '../../i18n/utils';
+import type { Locale } from '../../i18n/config';
+
+export function getStaticPaths() {
+  return getNonDefaultLocales().map(locale => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
+
+const headings = [
+  { id: 'overview', text: 'Overview', depth: 2 },
+  { id: 'visa-types', text: 'Visa Types for Expats', depth: 2 },
+  { id: 'e-visa', text: 'E-Visa (Up to 90 Days)', depth: 3 },
+  { id: 'business-visa', text: 'Business Visa (DN/DT)', depth: 3 },
+  { id: 'work-permit-visa', text: 'Work Permit & LD Visa', depth: 3 },
+  { id: 'investor-visa', text: 'Investor Visa (DT)', depth: 3 },
+  { id: 'dependent-visa', text: 'Dependent Visa (TT)', depth: 3 },
+  { id: 'temporary-residence', text: 'Temporary Residence Card (TRC)', depth: 2 },
+  { id: 'visa-runs', text: 'Visa Runs: Still an Option?', depth: 2 },
+  { id: 'overstaying', text: 'Overstaying Penalties', depth: 2 },
+  { id: 'common-mistakes', text: 'Common Visa Mistakes', depth: 2 },
+  { id: 'when-to-get-help', text: 'When to Get Professional Help', depth: 2 },
+];
+---
+
+<PillarLayout
+  title={t(locale, 'pillarPages.visa.title')}
+  description={t(locale, 'pillarPages.visa.desc')}
+  lastUpdated="February 2026"
+  breadcrumbLabel={t(locale, 'pillarPages.visa.title')}
+  headings={headings}
+  currentSlug="visa"
+  locale={locale}
+  leadMagnet={{
+    title: t(locale, 'resources.1.title'),
+    description: t(locale, 'resources.1.desc'),
+  }}
+>
+  <!-- Content remains in English for now — will be translated in Phase 3-5 -->
+  <h2 id="overview">Overview</h2>
+  <p>
+    Vietnam's visa system is famously confusing — even for people who've lived here for years. The rules change frequently, enforcement varies by province, and the information you find online is often outdated or contradictory.
+  </p>
+  <p>
+    This guide breaks down every visa option available to expats, explains who qualifies for what, and helps you plan a long-term stay without the constant stress of renewals and border runs.
+  </p>
+
+  <h2 id="visa-types">Visa Types for Expats</h2>
+  <p>Vietnam issues several visa categories. Here are the ones that matter for expats:</p>
+
+  <h3 id="e-visa">E-Visa (Up to 90 Days)</h3>
+  <p>
+    The easiest entry option. Available to citizens of most countries. Apply online, receive approval in 3 business days, and enter at major airports and border crossings.
+  </p>
+  <ul>
+    <li><strong>Duration:</strong> Up to 90 days, single or multiple entry</li>
+    <li><strong>Cost:</strong> $25 USD (government fee)</li>
+    <li><strong>Best for:</strong> Short visits, initial scouting trips, digital nomads testing the waters</li>
+    <li><strong>Limitation:</strong> Cannot work legally on an e-visa</li>
+  </ul>
+
+  <h3 id="business-visa">Business Visa (DN/DT)</h3>
+  <p>
+    For expats who need to conduct business activities in Vietnam. Requires a sponsoring Vietnamese company or organization.
+  </p>
+  <ul>
+    <li><strong>DN visa:</strong> For those working for Vietnamese companies</li>
+    <li><strong>DT visa:</strong> For investors and company directors</li>
+    <li><strong>Duration:</strong> Up to 12 months, multiple entry</li>
+    <li><strong>Requirement:</strong> Sponsorship letter from a Vietnamese entity</li>
+  </ul>
+
+  <h3 id="work-permit-visa">Work Permit & LD Visa</h3>
+  <p>
+    If you're employed by a Vietnamese company, you legally need a work permit and LD visa. This is the only visa that allows you to work for a local employer.
+  </p>
+  <ul>
+    <li><strong>Work permit validity:</strong> Up to 2 years</li>
+    <li><strong>Requirements:</strong> Criminal background check, health certificate, degree authentication, and employer sponsorship</li>
+    <li><strong>Processing time:</strong> 4-8 weeks (plan ahead)</li>
+    <li><strong>Important:</strong> The work permit is tied to a specific employer. Change jobs = new work permit</li>
+  </ul>
+
+  <h3 id="investor-visa">Investor Visa (DT)</h3>
+  <p>
+    If you own or invest in a Vietnamese company, the DT visa gives you longer-term stay options.
+  </p>
+  <ul>
+    <li><strong>DT1:</strong> Investment of 100 billion VND+ (~$4M USD)</li>
+    <li><strong>DT2:</strong> Investment below 100 billion VND</li>
+    <li><strong>Duration:</strong> Up to 5 years</li>
+    <li><strong>Key benefit:</strong> Path to Temporary Residence Card</li>
+  </ul>
+
+  <h3 id="dependent-visa">Dependent Visa (TT)</h3>
+  <p>
+    For spouses, children, and parents of Vietnamese citizens or expats with work permits.
+  </p>
+  <ul>
+    <li><strong>Duration:</strong> Matches the sponsor's visa/work permit validity</li>
+    <li><strong>Requirements:</strong> Proof of family relationship (marriage certificate, birth certificate) — translated and notarized</li>
+    <li><strong>Note:</strong> Does NOT grant work rights. Dependents need their own work permit to work legally.</li>
+  </ul>
+
+  <h2 id="temporary-residence">Temporary Residence Card (TRC)</h2>
+  <p>
+    The TRC is the closest thing Vietnam has to a "long-term residency" for foreigners. It eliminates the need for constant visa renewals and lets you enter/exit freely.
+  </p>
+  <ul>
+    <li><strong>Validity:</strong> 2-5 years depending on your visa category</li>
+    <li><strong>Benefits:</strong> No visa runs, multiple re-entry, easier banking and administration</li>
+    <li><strong>Who qualifies:</strong> Work permit holders, investors, and dependents of the above</li>
+    <li><strong>Cost:</strong> Varies by duration and processing speed (~$100-$300 in official fees)</li>
+  </ul>
+
+  <h2 id="visa-runs">Visa Runs: Still an Option?</h2>
+  <p>
+    The old strategy of leaving Vietnam every 3 months and re-entering on a fresh visa is becoming increasingly risky. Immigration authorities have cracked down on repeated visa-run patterns.
+  </p>
+  <p>
+    <strong>Our recommendation:</strong> If you plan to stay in Vietnam long-term, invest in a proper visa category. The peace of mind alone is worth it.
+  </p>
+
+  <h2 id="overstaying">Overstaying Penalties</h2>
+  <p>
+    Overstaying your visa in Vietnam carries real consequences:
+  </p>
+  <ul>
+    <li><strong>1-15 days overstay:</strong> Fine of 500,000 - 2,000,000 VND (~$20-$80 USD)</li>
+    <li><strong>16-30 days:</strong> Fine of 3,000,000 - 5,000,000 VND (~$120-$200)</li>
+    <li><strong>30+ days:</strong> Fine + possible deportation + entry ban</li>
+    <li><strong>Working without permit:</strong> Fines up to 75,000,000 VND (~$3,000) for both you and your employer</li>
+  </ul>
+
+  <h2 id="common-mistakes">Common Visa Mistakes</h2>
+  <ol>
+    <li><strong>Waiting too long to renew</strong> — Start the process at least 30 days before expiry. Some processes take 6-8 weeks.</li>
+    <li><strong>Working on a tourist visa</strong> — Even remote work for a Vietnamese company is technically illegal without a work permit.</li>
+    <li><strong>Trusting visa agents blindly</strong> — Some agents use "grey area" methods that may backfire. Understand what's being done on your behalf.</li>
+    <li><strong>Not keeping copies</strong> — Keep digital copies of your passport, visa, work permit, and all stamps. You'll need them repeatedly.</li>
+  </ol>
+
+  <h2 id="when-to-get-help">When to Get Professional Help</h2>
+  <p>
+    Visa situations where professional guidance saves you time, money, and stress:
+  </p>
+  <ul>
+    <li>You're not sure which visa category fits your situation</li>
+    <li>You need a work permit but your employer is dragging their feet</li>
+    <li>You've overstayed and need to resolve the situation cleanly</li>
+    <li>You want to transition from tourist visa to long-term residency</li>
+    <li>You're setting up a company and need investor visa guidance</li>
+  </ul>
+
+</PillarLayout>

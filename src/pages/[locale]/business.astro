@@ -1,0 +1,153 @@
+---
+// [locale]/business.astro - Localized business pillar page
+import PillarLayout from '../../layouts/PillarLayout.astro';
+import { getNonDefaultLocales, t } from '../../i18n/utils';
+import type { Locale } from '../../i18n/config';
+
+export function getStaticPaths() {
+  return getNonDefaultLocales().map(locale => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
+
+const headings = [
+  { id: 'overview', text: 'Overview', depth: 2 },
+  { id: 'business-structures', text: 'Business Structures', depth: 2 },
+  { id: 'llc', text: 'LLC (Limited Liability Company)', depth: 3 },
+  { id: 'representative-office', text: 'Representative Office', depth: 3 },
+  { id: 'branch-office', text: 'Branch Office', depth: 3 },
+  { id: 'registration-process', text: 'Registration Process', depth: 2 },
+  { id: 'work-permits', text: 'Work Permits for Business Owners', depth: 2 },
+  { id: 'foreign-ownership', text: 'Foreign Ownership Rules', depth: 2 },
+  { id: 'taxes', text: 'Tax Obligations', depth: 2 },
+  { id: 'banking', text: 'Business Banking', depth: 2 },
+  { id: 'common-pitfalls', text: 'Common Pitfalls', depth: 2 },
+  { id: 'when-to-get-help', text: 'When to Get Professional Help', depth: 2 },
+];
+---
+
+<PillarLayout
+  title={t(locale, 'pillarPages.business.title')}
+  description={t(locale, 'pillarPages.business.desc')}
+  lastUpdated="February 2026"
+  breadcrumbLabel={t(locale, 'pillarPages.business.title')}
+  headings={headings}
+  currentSlug="business"
+  locale={locale}
+  leadMagnet={{
+    title: t(locale, 'resources.2.title'),
+    description: t(locale, 'resources.2.desc'),
+  }}
+>
+  <!-- Content remains in English for now — will be translated in Phase 3-5 -->
+  <h2 id="overview">Overview</h2>
+  <p>
+    Vietnam is one of the fastest-growing economies in Southeast Asia, and many expats see business opportunities here. But starting a company as a foreigner involves navigating a complex web of regulations, permits, and bureaucracy.
+  </p>
+  <p>
+    This guide covers the main business structures available to foreigners, the registration process, and the most common mistakes that cost expats time and money.
+  </p>
+
+  <h2 id="business-structures">Business Structures</h2>
+  <p>Foreigners in Vietnam have three main options for establishing a business presence:</p>
+
+  <h3 id="llc">LLC (Limited Liability Company)</h3>
+  <p>The most common structure for foreign-owned businesses in Vietnam.</p>
+  <ul>
+    <li><strong>Ownership:</strong> 100% foreign ownership is possible in many industries</li>
+    <li><strong>Minimum capital:</strong> No legal minimum (but immigration may require proof of adequate capital)</li>
+    <li><strong>Timeline:</strong> 4-8 weeks for initial registration</li>
+    <li><strong>Best for:</strong> Expats who want to operate, hire staff, and generate revenue in Vietnam</li>
+    <li><strong>You'll need:</strong> Investment Registration Certificate (IRC) + Enterprise Registration Certificate (ERC)</li>
+  </ul>
+
+  <h3 id="representative-office">Representative Office</h3>
+  <p>A lighter option if you don't need to generate revenue in Vietnam.</p>
+  <ul>
+    <li><strong>Can do:</strong> Market research, liaison, promotion of parent company</li>
+    <li><strong>Cannot do:</strong> Sign contracts, generate revenue, or engage in direct business activities</li>
+    <li><strong>Timeline:</strong> 2-4 weeks</li>
+    <li><strong>Best for:</strong> Companies testing the Vietnamese market before committing</li>
+  </ul>
+
+  <h3 id="branch-office">Branch Office</h3>
+  <p>A branch of a foreign company that can conduct limited business activities.</p>
+  <ul>
+    <li><strong>Restriction:</strong> Limited to industries where Vietnam has WTO commitments</li>
+    <li><strong>Rarely used:</strong> Most expats choose LLC or Rep Office instead</li>
+    <li><strong>Best for:</strong> Large foreign companies with specific sector needs</li>
+  </ul>
+
+  <h2 id="registration-process">Registration Process</h2>
+  <p>For a foreign-owned LLC, the typical process involves:</p>
+  <ol>
+    <li><strong>Investment Registration Certificate (IRC)</strong> — Apply at the Department of Planning and Investment (DPI). Includes business plan, proof of financial capacity, and office lease.</li>
+    <li><strong>Enterprise Registration Certificate (ERC)</strong> — Filed after IRC approval. Officially creates the legal entity.</li>
+    <li><strong>Tax registration</strong> — Register with the local tax authority. Get tax code (same as ERC number).</li>
+    <li><strong>Bank account</strong> — Open a corporate bank account and deposit charter capital.</li>
+    <li><strong>Business license</strong> — Required for certain industries (education, F&B, retail, etc.).</li>
+    <li><strong>Work permit</strong> — Apply for your own work permit as the company's legal representative.</li>
+  </ol>
+
+  <h2 id="work-permits">Work Permits for Business Owners</h2>
+  <p>
+    Even if you own the company, you still need a work permit to legally work in Vietnam. The only exemption is if you're a company member (owner) who is NOT also the legal representative or manager.
+  </p>
+  <ul>
+    <li><strong>Documents needed:</strong> Criminal background check, health certificate, degree authentication, appointment letter</li>
+    <li><strong>Validity:</strong> Up to 2 years, renewable</li>
+    <li><strong>Common issue:</strong> The background check must be from your home country and recently authenticated — this can take weeks to arrange</li>
+  </ul>
+
+  <h2 id="foreign-ownership">Foreign Ownership Rules</h2>
+  <p>
+    While Vietnam has opened up significantly, not all industries allow 100% foreign ownership:
+  </p>
+  <ul>
+    <li><strong>100% foreign ownership allowed:</strong> IT, consulting, manufacturing, most services</li>
+    <li><strong>Restricted industries:</strong> Education, media, logistics, telecommunications, retail (may require a Vietnamese partner or special license)</li>
+    <li><strong>Prohibited:</strong> Certain defense and security-related activities</li>
+  </ul>
+  <p>
+    The specific WTO commitments and bilateral trade agreements determine what's available. Always check the latest "negative list" before planning your business structure.
+  </p>
+
+  <h2 id="taxes">Tax Obligations</h2>
+  <ul>
+    <li><strong>Corporate Income Tax (CIT):</strong> 20% standard rate</li>
+    <li><strong>Value Added Tax (VAT):</strong> 8-10% (depending on sector)</li>
+    <li><strong>Personal Income Tax (PIT):</strong> Progressive scale from 5% to 35% on salary</li>
+    <li><strong>Foreign Contractor Tax (FCT):</strong> Applies if you pay overseas service providers</li>
+    <li><strong>Monthly/quarterly filings:</strong> Required — late filing incurs penalties</li>
+  </ul>
+
+  <h2 id="banking">Business Banking</h2>
+  <p>
+    Opening a corporate bank account requires the IRC, ERC, company seal, and passport of the legal representative. Most expats use Vietcombank, BIDV, or Techcombank.
+  </p>
+  <p>
+    <strong>Pro tip:</strong> Some banks are faster and more foreigner-friendly than others. Ask other expat business owners for recommendations in your area.
+  </p>
+
+  <h2 id="common-pitfalls">Common Pitfalls</h2>
+  <ol>
+    <li><strong>Underestimating timeline</strong> — Budget 3-6 months from decision to fully operational.</li>
+    <li><strong>Wrong business scope</strong> — Your IRC specifies what activities you can do. Getting the scope wrong means re-applying.</li>
+    <li><strong>No office lease before applying</strong> — You need a registered office address to apply for IRC. A virtual office may not be accepted.</li>
+    <li><strong>Ignoring the work permit</strong> — Operating without one puts both you and the company at risk.</li>
+    <li><strong>DIY without local knowledge</strong> — Regulations are in Vietnamese and enforcement varies. A consultant saves you multiple rounds of rejection.</li>
+  </ol>
+
+  <h2 id="when-to-get-help">When to Get Professional Help</h2>
+  <ul>
+    <li>You're not sure which business structure fits your plan</li>
+    <li>Your industry may have foreign ownership restrictions</li>
+    <li>You need help preparing IRC/ERC documents</li>
+    <li>You want to understand tax obligations before committing</li>
+    <li>You've hit a roadblock with registration and don't know why</li>
+  </ul>
+
+</PillarLayout>

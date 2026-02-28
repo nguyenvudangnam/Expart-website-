@@ -1,6 +1,11 @@
 ---
 // Testimonials.astro - Premium client testimonials (hidden until enabled)
+import { t, getLocaleFromUrl } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
 import testimonialsData from '../data/testimonials.json';
+
+interface Props { locale?: Locale; }
+const locale = Astro.props.locale ?? getLocaleFromUrl(Astro.url);
 
 const { enabled, items } = testimonialsData;
 ---
@@ -12,10 +17,10 @@ const { enabled, items } = testimonialsData;
       <div class="text-center max-w-2xl mx-auto mb-12">
         <div class="divider-gold mx-auto mb-6"></div>
         <h2 class="font-heading text-3xl md:text-4xl font-bold text-navy mb-4">
-          What expats are saying
+          {t(locale, 'testimonials.title')}
         </h2>
         <p class="text-text-muted text-lg">
-          Real results from real people who were exactly where you are.
+          {t(locale, 'testimonials.subtitle')}
         </p>
       </div>
 

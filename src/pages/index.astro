@@ -6,6 +6,10 @@ import PainPoints from '../components/PainPoints.astro';
 import Differentiators from '../components/Differentiators.astro';
 import Testimonials from '../components/Testimonials.astro';
 import CtaSection from '../components/CtaSection.astro';
+import { t, getLocaleFromUrl } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+
+const locale = getLocaleFromUrl(Astro.url);
 
 // LegalService Schema markup
 const schemaMarkup = {
@@ -25,15 +29,16 @@ const schemaMarkup = {
 ---
 
 <PageLayout
-  title="Expat Legal Vietnam"
+  title={t(locale, 'site.name')}
   description="Plain-English legal guidance for expats in Vietnam. Visa, renting, business, and family questions answered clearly. Book a consultation today."
+  locale={locale}
 >
   <!-- LegalService structured data -->
   <script type="application/ld+json" set:html={JSON.stringify(schemaMarkup)} />
 
-  <Hero />
-  <PainPoints />
-  <Differentiators />
-  <Testimonials />
-  <CtaSection />
+  <Hero locale={locale} />
+  <PainPoints locale={locale} />
+  <Differentiators locale={locale} />
+  <Testimonials locale={locale} />
+  <CtaSection locale={locale} />
 </PageLayout>

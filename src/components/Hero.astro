@@ -1,5 +1,10 @@
 ---
 // Hero.astro - Premium homepage hero with dramatic gradient
+import { t, getLocaleFromUrl, localizedUrl } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+
+interface Props { locale?: Locale; }
+const locale = Astro.props.locale ?? getLocaleFromUrl(Astro.url);
 ---
 
 <section id="hero" class="relative overflow-hidden grain">
@@ -24,33 +29,33 @@
         <!-- Trust badge -->
         <div class="animate-fade-up inline-flex items-center gap-2.5 bg-white/[0.08] backdrop-blur-sm text-gold-pale text-sm font-medium px-5 py-2 rounded-full mb-8 border border-white/[0.06]">
           <span class="w-2 h-2 rounded-full bg-success animate-pulse"></span>
-          <span>Legal Guidance for Expats in Vietnam</span>
+          <span>{t(locale, 'hero.badge')}</span>
         </div>
 
         <!-- Headline -->
         <h1 class="animate-fade-up font-heading text-4xl md:text-5xl lg:text-[3.5rem] xl:text-[4rem] font-bold text-white leading-[1.1] mb-6" style="animation-delay: 0.1s">
-          Navigate Vietnam's Legal System
-          <span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-bright to-gold"> Without the Confusion</span>
+          {t(locale, 'hero.headline')}
+          <span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-bright to-gold"> {t(locale, 'hero.headlineAccent')}</span>
         </h1>
 
         <!-- Subheadline -->
         <p class="animate-fade-up text-lg md:text-xl text-white/60 leading-relaxed mb-10 max-w-2xl mx-auto" style="animation-delay: 0.2s">
-          Plain-English answers to your visa, renting, business, and family legal questions — from someone who actually knows Vietnam's system.
+          {t(locale, 'hero.subheadline')}
         </p>
 
         <!-- CTA group -->
         <div class="animate-fade-up flex flex-col sm:flex-row gap-4 justify-center items-center" style="animation-delay: 0.3s">
           <a
-            href="/book"
+            href={localizedUrl(locale, '/book')}
             class="w-full sm:w-auto btn-gold inline-flex items-center justify-center gap-2 text-white font-semibold px-8 py-4 rounded-xl text-base"
           >
-            Book a 60-Min Consultation — $150
+            {t(locale, 'hero.ctaPrimary')}
           </a>
           <a
             href="#guides"
             class="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-white/80 font-semibold px-8 py-4 rounded-xl border border-white/20 hover:border-white/40 hover:bg-white/[0.06] transition-all duration-300 text-base backdrop-blur-sm"
           >
-            Read Free Guides ↓
+            {t(locale, 'hero.ctaSecondary')}
           </a>
         </div>
 
@@ -58,15 +63,15 @@
         <div class="animate-fade-up mt-10 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-white/40" style="animation-delay: 0.4s">
           <span class="flex items-center gap-1.5">
             <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-            English-speaking
+            {t(locale, 'hero.proofEnglish')}
           </span>
           <span class="flex items-center gap-1.5">
             <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-            Response within 24h
+            {t(locale, 'hero.proofResponse')}
           </span>
           <span class="flex items-center gap-1.5">
             <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-            No jargon
+            {t(locale, 'hero.proofJargon')}
           </span>
         </div>
       </div>

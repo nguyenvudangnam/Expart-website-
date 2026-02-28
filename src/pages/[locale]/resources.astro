@@ -1,54 +1,31 @@
 ---
-// resources.astro - Premium free resources page
-import PageLayout from '../layouts/PageLayout.astro';
-import CtaSection from '../components/CtaSection.astro';
-import { t, getLocaleFromUrl, localizedUrl } from '../i18n/utils';
-import type { Locale } from '../i18n/config';
+// [locale]/resources.astro - Localized resources page
+import PageLayout from '../../layouts/PageLayout.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import { getNonDefaultLocales, t, localizedUrl } from '../../i18n/utils';
+import type { Locale } from '../../i18n/config';
 
-const locale = getLocaleFromUrl(Astro.url);
+export function getStaticPaths() {
+  return getNonDefaultLocales().map(locale => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
 
 const resources = [
-  {
-    icon: '🏠',
-    title: t(locale, 'resources.0.title'),
-    description: t(locale, 'resources.0.desc'),
-    tags: ['Renting', 'Contracts'],
-    relatedGuide: localizedUrl(locale, '/renting'),
-  },
-  {
-    icon: '🛂',
-    title: t(locale, 'resources.1.title'),
-    description: t(locale, 'resources.1.desc'),
-    tags: ['Visa', 'Immigration'],
-    relatedGuide: localizedUrl(locale, '/visa'),
-  },
-  {
-    icon: '💼',
-    title: t(locale, 'resources.2.title'),
-    description: t(locale, 'resources.2.desc'),
-    tags: ['Business', 'LLC'],
-    relatedGuide: localizedUrl(locale, '/business'),
-  },
-  {
-    icon: '👨‍👩‍👧',
-    title: t(locale, 'resources.3.title'),
-    description: t(locale, 'resources.3.desc'),
-    tags: ['Family', 'Documents'],
-    relatedGuide: localizedUrl(locale, '/family'),
-  },
-  {
-    icon: '📄',
-    title: t(locale, 'resources.4.title'),
-    description: t(locale, 'resources.4.desc'),
-    tags: ['Documents', 'Apostille'],
-    relatedGuide: localizedUrl(locale, '/documents'),
-  },
+  { icon: '🏠', guideHref: '/renting', tags: ['Renting', 'Contracts'] },
+  { icon: '🛂', guideHref: '/visa', tags: ['Visa', 'Immigration'] },
+  { icon: '💼', guideHref: '/business', tags: ['Business', 'LLC'] },
+  { icon: '👨‍👩‍👧', guideHref: '/family', tags: ['Family', 'Documents'] },
+  { icon: '📄', guideHref: '/documents', tags: ['Documents', 'Apostille'] },
 ];
 ---
 
 <PageLayout
   title={t(locale, 'resources.title')}
-  description="Free checklists, flowcharts, and trackers for expats navigating legal processes in Vietnam."
+  description={t(locale, 'resources.subtitle')}
   locale={locale}
 >
 
@@ -69,12 +46,11 @@ const resources = [
 
       <!-- Resources grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-        {resources.map(resource => (
+        {resources.map((resource, idx) => (
           <div class="card-premium p-6 rounded-2xl border border-border-light bg-surface">
             <div class="flex items-start gap-4">
               <span class="text-3xl shrink-0 w-12 h-12 flex items-center justify-center rounded-xl bg-cream" aria-hidden="true">{resource.icon}</span>
               <div class="flex-1">
-                <!-- Tags -->
                 <div class="flex gap-2 mb-2">
                   {resource.tags.map(tag => (
                     <span class="text-xs font-medium text-navy bg-navy/[0.06] px-2 py-0.5 rounded-full">
@@ -83,11 +59,10 @@ const resources = [
                   ))}
                 </div>
 
-                <h2 class="font-heading text-lg font-bold text-navy mb-1">{resource.title}</h2>
-                <p class="text-text-muted text-sm leading-relaxed mb-4">{resource.description}</p>
+                <h2 class="font-heading text-lg font-bold text-navy mb-1">{t(locale, `resources.${idx}.title`)}</h2>
+                <p class="text-text-muted text-sm leading-relaxed mb-4">{t(locale, `resources.${idx}.desc`)}</p>
 
                 <div class="flex flex-wrap gap-2">
-                  <!-- Email capture placeholder -->
                   <div class="w-full p-3 rounded-lg bg-cream/50 border border-border-light">
                     <p class="text-xs text-text-muted mb-2">{t(locale, 'resources.emailPrompt')}</p>
                     <form class="flex gap-2" onsubmit="return false;">
@@ -107,7 +82,7 @@ const resources = [
                   </div>
 
                   <a
-                    href={resource.relatedGuide}
+                    href={localizedUrl(locale, resource.guideHref)}
                     class="text-xs text-gold font-medium hover:text-navy hover:underline transition-colors"
                   >
                     {t(locale, 'resources.readGuide')}

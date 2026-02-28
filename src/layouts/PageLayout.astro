@@ -1,29 +1,33 @@
 ---
-// PageLayout.astro - Nav + Footer wrapper for all pages
+// PageLayout.astro - Nav + Footer wrapper (i18n-aware)
 import BaseLayout from './BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import CtaBar from '../components/CtaBar.astro';
+import { getLocaleFromUrl } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
 
 interface Props {
   title: string;
   description: string;
   ogImage?: string;
   canonicalURL?: string;
+  locale?: Locale;
 }
 
-const { title, description, ogImage, canonicalURL } = Astro.props;
+const { title, description, ogImage, canonicalURL, locale: localeProp } = Astro.props;
+const locale = localeProp ?? getLocaleFromUrl(Astro.url);
 ---
 
-<BaseLayout title={title} description={description} ogImage={ogImage} canonicalURL={canonicalURL}>
+<BaseLayout title={title} description={description} ogImage={ogImage} canonicalURL={canonicalURL} locale={locale}>
   <!-- Sticky mobile CTA bar -->
-  <CtaBar />
+  <CtaBar locale={locale} />
 
-  <Nav />
+  <Nav locale={locale} />
 
   <main id="main-content">
     <slot />
   </main>
 
-  <Footer />
+  <Footer locale={locale} />
 </BaseLayout>

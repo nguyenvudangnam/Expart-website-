@@ -1,0 +1,162 @@
+---
+// [locale]/documents.astro - Localized documents pillar page
+import PillarLayout from '../../layouts/PillarLayout.astro';
+import { getNonDefaultLocales, t } from '../../i18n/utils';
+import type { Locale } from '../../i18n/config';
+
+export function getStaticPaths() {
+  return getNonDefaultLocales().map(locale => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
+
+const headings = [
+  { id: 'overview', text: 'Overview', depth: 2 },
+  { id: 'apostille', text: 'Apostille & Legalization', depth: 2 },
+  { id: 'what-is-apostille', text: 'What Is an Apostille?', depth: 3 },
+  { id: 'vietnam-process', text: 'The Vietnam Process', depth: 3 },
+  { id: 'translation', text: 'Certified Translation', depth: 2 },
+  { id: 'notarization', text: 'Notarization in Vietnam', depth: 2 },
+  { id: 'common-documents', text: 'Common Documents Expats Need', depth: 2 },
+  { id: 'criminal-background', text: 'Criminal Background Check', depth: 3 },
+  { id: 'health-certificate', text: 'Health Certificate', depth: 3 },
+  { id: 'degree-authentication', text: 'Degree Authentication', depth: 3 },
+  { id: 'power-of-attorney', text: 'Power of Attorney', depth: 2 },
+  { id: 'processing-times', text: 'Processing Times & Costs', depth: 2 },
+  { id: 'when-to-get-help', text: 'When to Get Professional Help', depth: 2 },
+];
+---
+
+<PillarLayout
+  title={t(locale, 'pillarPages.documents.title')}
+  description={t(locale, 'pillarPages.documents.desc')}
+  lastUpdated="February 2026"
+  breadcrumbLabel={t(locale, 'pillarPages.documents.title')}
+  headings={headings}
+  currentSlug="documents"
+  locale={locale}
+  leadMagnet={{
+    title: t(locale, 'resources.4.title'),
+    description: t(locale, 'resources.4.desc'),
+  }}
+>
+  <!-- Content remains in English for now — will be translated in Phase 3-5 -->
+  <h2 id="overview">Overview</h2>
+  <p>
+    Almost every major life event as an expat in Vietnam — getting a work permit, starting a business, getting married, enrolling kids in school — requires authenticated documents. The process involves multiple steps across multiple countries, and getting one step wrong means starting over.
+  </p>
+  <p>
+    This guide explains the document legalization chain, what each step means, and how to avoid the most common (and expensive) mistakes.
+  </p>
+
+  <h2 id="apostille">Apostille & Legalization</h2>
+
+  <h3 id="what-is-apostille">What Is an Apostille?</h3>
+  <p>
+    An apostille is an international certification that verifies a document is legitimate. It's used between countries that are part of the Hague Apostille Convention.
+  </p>
+  <p>
+    <strong>Vietnam joined the Hague Convention in 2023.</strong> This means documents from other member countries can be authenticated with a single apostille, simplifying the process significantly.
+  </p>
+
+  <h3 id="vietnam-process">The Vietnam Process</h3>
+  <p>For documents from Hague Convention member countries:</p>
+  <ol>
+    <li><strong>Get the apostille</strong> in your home country (usually from the Secretary of State or equivalent authority)</li>
+    <li><strong>Translate</strong> the document into Vietnamese by a certified translator in Vietnam</li>
+    <li><strong>Notarize</strong> the translation at a Vietnamese notary public</li>
+  </ol>
+  <p>For documents from non-Hague countries, the process requires consular legalization instead — a longer chain involving your country's embassy.</p>
+
+  <h2 id="translation">Certified Translation</h2>
+  <p>
+    All foreign-language documents used in Vietnam must be translated into Vietnamese by a certified translator. Key points:
+  </p>
+  <ul>
+    <li><strong>Who can translate:</strong> Only certified translation companies registered with Vietnamese authorities</li>
+    <li><strong>Cost:</strong> 200,000-500,000 VND per page (~$8-$20) depending on complexity</li>
+    <li><strong>Timeline:</strong> 1-3 business days for standard documents</li>
+    <li><strong>Important:</strong> The translation must be notarized by a Vietnamese notary to be officially accepted</li>
+  </ul>
+
+  <h2 id="notarization">Notarization in Vietnam</h2>
+  <p>
+    Vietnamese notarization (cong chung) is different from Western notarization. A Vietnamese notary verifies and certifies the accuracy of translations and copies.
+  </p>
+  <ul>
+    <li><strong>Cost:</strong> 50,000-200,000 VND per document</li>
+    <li><strong>Where:</strong> Any registered notary office (van phong cong chung)</li>
+    <li><strong>Required:</strong> Original document + translation + your passport</li>
+  </ul>
+
+  <h2 id="common-documents">Common Documents Expats Need</h2>
+
+  <h3 id="criminal-background">Criminal Background Check</h3>
+  <p>
+    Required for work permits and some visa applications. Must be from your home country (or any country where you've lived for 6+ months in the last 5 years).
+  </p>
+  <ul>
+    <li><strong>US citizens:</strong> FBI background check via channelers (~2-4 weeks)</li>
+    <li><strong>UK citizens:</strong> DBS check (ACRO police certificate for overseas use)</li>
+    <li><strong>Australian citizens:</strong> AFP National Police Check</li>
+    <li><strong>Validity:</strong> Generally accepted within 6 months of issue</li>
+    <li><strong>Then:</strong> Apostille + translate + notarize in Vietnam</li>
+  </ul>
+
+  <h3 id="health-certificate">Health Certificate</h3>
+  <p>
+    Required for work permit applications. Must be issued by a Vietnamese hospital approved by the Department of Health.
+  </p>
+  <ul>
+    <li><strong>Where:</strong> International hospitals (FV, Vinmec, etc.) or designated government hospitals</li>
+    <li><strong>Includes:</strong> General health, blood tests, chest X-ray, mental health certification</li>
+    <li><strong>Cost:</strong> 500,000-2,000,000 VND (~$20-$80)</li>
+    <li><strong>Validity:</strong> 12 months from issue date</li>
+  </ul>
+
+  <h3 id="degree-authentication">Degree Authentication</h3>
+  <p>
+    Your university degree must be authenticated for work permit applications. The process:
+  </p>
+  <ol>
+    <li>Get apostille on the original degree in your home country</li>
+    <li>Have it translated into Vietnamese</li>
+    <li>Notarize the translation in Vietnam</li>
+    <li>Some roles require degree evaluation by Vietnam's Department of Education</li>
+  </ol>
+
+  <h2 id="power-of-attorney">Power of Attorney</h2>
+  <p>
+    If you need someone to act on your behalf in Vietnam (e.g., sign contracts, handle government paperwork while you're abroad), you'll need a Power of Attorney (POA):
+  </p>
+  <ul>
+    <li><strong>Domestic POA:</strong> Notarized at any Vietnamese notary office</li>
+    <li><strong>International POA:</strong> Executed at your country's embassy in Vietnam, or at a notary in your home country (then apostilled and translated)</li>
+    <li><strong>Scope:</strong> Be very specific about what powers you're granting. General POAs carry more risk.</li>
+  </ul>
+
+  <h2 id="processing-times">Processing Times & Costs</h2>
+  <p>Typical timelines for the complete authentication chain:</p>
+  <ul>
+    <li><strong>FBI background check:</strong> 2-4 weeks (US)</li>
+    <li><strong>Apostille (home country):</strong> 1-4 weeks depending on country</li>
+    <li><strong>International shipping:</strong> 3-7 days (use tracked courier)</li>
+    <li><strong>Translation in Vietnam:</strong> 1-3 days</li>
+    <li><strong>Notarization:</strong> Same day to 2 days</li>
+    <li><strong>Total estimate:</strong> 4-8 weeks from start to finish</li>
+  </ul>
+  <p><strong>Pro tip:</strong> Start the document process the moment you know you'll need a work permit. The biggest delays are always in the home country step.</p>
+
+  <h2 id="when-to-get-help">When to Get Professional Help</h2>
+  <ul>
+    <li>You're unsure which documents need apostille vs. consular legalization</li>
+    <li>Your home country's process is confusing and you need step-by-step guidance</li>
+    <li>A document was rejected and you need to understand why</li>
+    <li>You need a Power of Attorney and want to ensure it's properly scoped</li>
+    <li>You're under time pressure for a work permit deadline</li>
+  </ul>
+
+</PillarLayout>

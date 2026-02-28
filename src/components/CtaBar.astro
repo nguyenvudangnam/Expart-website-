@@ -1,5 +1,10 @@
 ---
 // CtaBar.astro - Premium sticky bottom CTA bar for mobile
+import { t, getLocaleFromUrl, localizedUrl } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+
+interface Props { locale?: Locale; }
+const locale = Astro.props.locale ?? getLocaleFromUrl(Astro.url);
 ---
 
 <div
@@ -13,13 +18,13 @@
 
   <div class="relative flex items-center justify-between px-4 py-3.5 gap-3">
     <p class="text-white/70 text-sm font-medium leading-tight">
-      Need help? <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-bright font-semibold">Book a 60-min call</span>
+      {t(locale, 'ctaBar.text')} <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-bright font-semibold">{t(locale, 'ctaBar.highlight')}</span>
     </p>
     <a
-      href="/book"
+      href={localizedUrl(locale, '/book')}
       class="shrink-0 btn-gold text-white text-sm font-semibold px-5 py-2.5 rounded-lg"
     >
-      Book Now →
+      {t(locale, 'ctaBar.button')}
     </a>
   </div>
 </div>

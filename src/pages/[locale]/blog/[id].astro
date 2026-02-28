@@ -1,27 +1,28 @@
 ---
-// blog/[id].astro - Premium individual blog post template
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Nav from '../../components/Nav.astro';
-import Footer from '../../components/Footer.astro';
-import CtaBar from '../../components/CtaBar.astro';
-import BackToTop from '../../components/BackToTop.astro';
-import CtaSection from '../../components/CtaSection.astro';
+// [locale]/blog/[id].astro - Localized individual blog post template
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import CtaBar from '../../../components/CtaBar.astro';
+import BackToTop from '../../../components/BackToTop.astro';
+import CtaSection from '../../../components/CtaSection.astro';
 import { getCollection, render } from 'astro:content';
-import { t, getLocaleFromUrl, localizedUrl } from '../../i18n/utils';
-import { localeTags, type Locale } from '../../i18n/config';
+import { getNonDefaultLocales, t, localizedUrl } from '../../../i18n/utils';
+import { localeTags, type Locale } from '../../../i18n/config';
 
 export async function getStaticPaths() {
+  const locales = getNonDefaultLocales();
   const posts = await getCollection('blog', ({ data }) => !data.draft);
-  return posts.map(post => ({
-    params: { id: post.id },
-    props: { post },
-  }));
+  return locales.flatMap(locale =>
+    posts.map(post => ({
+      params: { locale, id: post.id },
+      props: { locale, post },
+    }))
+  );
 }
 
-const { post } = Astro.props;
+const { locale, post } = Astro.props as { locale: Locale; post: any };
 const { Content } = await render(post);
-
-const locale = getLocaleFromUrl(Astro.url);
 
 // Date formatting locale tag
 const dateLang = localeTags[locale] ?? 'en-US';
@@ -69,7 +70,7 @@ const dateLang = localeTags[locale] ?? 'en-US';
           <time datetime={post.data.date}>
             {new Date(post.data.date).toLocaleDateString(dateLang, { year: 'numeric', month: 'long', day: 'numeric' })}
           </time>
-          <span>·</span>
+          <span>&middot;</span>
           <span>{post.data.author}</span>
         </div>
       </header>

@@ -1,12 +1,22 @@
 ---
 // FaqAccordion.astro - Premium FAQ accordion
-import faqData from '../data/faq.json';
+import { t, getLocaleFromUrl } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
 
 interface Props {
+  locale?: Locale;
   items?: { question: string; answer: string }[];
 }
 
-const { items = faqData } = Astro.props;
+const locale = Astro.props.locale ?? getLocaleFromUrl(Astro.url);
+
+// Build FAQ items from translations if no items prop provided
+const defaultFaqItems = Array.from({ length: 6 }, (_, i) => ({
+  question: t(locale, `faq.${i}.q`),
+  answer: t(locale, `faq.${i}.a`),
+}));
+
+const { items = defaultFaqItems } = Astro.props;
 ---
 
 <div class="flex flex-col gap-3" id="faq-accordion">

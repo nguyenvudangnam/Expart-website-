@@ -1,0 +1,93 @@
+---
+// [locale]/about.astro - Localized about page
+import PageLayout from '../../layouts/PageLayout.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import { getNonDefaultLocales, t, localizedUrl } from '../../i18n/utils';
+import type { Locale } from '../../i18n/config';
+
+export function getStaticPaths() {
+  return getNonDefaultLocales().map(locale => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
+---
+
+<PageLayout
+  title={t(locale, 'about.title')}
+  description={t(locale, 'about.whyP1')}
+  locale={locale}
+>
+
+  <section class="section-spacing bg-background relative">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+    <div class="container-page">
+      <div class="max-w-3xl mx-auto">
+
+        <!-- Profile section -->
+        <div class="flex flex-col md:flex-row gap-8 items-start mb-12">
+          <div class="w-32 h-32 md:w-40 md:h-40 rounded-2xl bg-gradient-to-br from-navy to-navy-mid flex items-center justify-center text-white text-4xl shrink-0 shadow-[0_4px_20px_rgba(15,35,55,0.2)]" aria-label="Profile photo placeholder">
+            👤
+          </div>
+          <div>
+            <div class="divider-gold mb-4"></div>
+            <h1 class="font-heading text-3xl md:text-4xl font-bold text-navy mb-2">
+              {t(locale, 'about.title')}
+            </h1>
+            <p class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-bright font-semibold mb-4">{t(locale, 'site.tagline')}</p>
+            <p class="text-text-muted leading-relaxed">
+              {t(locale, 'about.whyP1')}
+            </p>
+          </div>
+        </div>
+
+        <!-- Personal quote -->
+        <blockquote class="border-l-4 border-gold pl-6 py-4 my-8 bg-surface rounded-r-xl shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
+          <p class="text-navy font-heading text-lg md:text-xl italic leading-relaxed">
+            {t(locale, 'about.quoteText')}
+          </p>
+        </blockquote>
+
+        <!-- Why this exists -->
+        <h2 class="font-heading text-2xl font-bold text-navy mb-4">{t(locale, 'about.whyTitle')}</h2>
+        <p class="text-text-primary leading-relaxed mb-4">{t(locale, 'about.whyP1')}</p>
+        <p class="text-text-primary leading-relaxed mb-8">{t(locale, 'about.whyP2')}</p>
+
+        <!-- Credentials -->
+        <h2 class="font-heading text-2xl font-bold text-navy mb-4">{t(locale, 'about.credTitle')}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+          {[0, 1, 2, 3].map(i => (
+            <div class="card-premium p-4 rounded-xl border border-border-light bg-surface">
+              <p class="text-2xl mb-2" aria-hidden="true">{['🎓', '🇻🇳', '🌏', '🗣️'][i]}</p>
+              <h3 class="font-semibold text-navy text-sm mb-1">{t(locale, `about.cred${i}.title`)}</h3>
+              <p class="text-text-muted text-sm">{t(locale, `about.cred${i}.desc`)}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- What I don't do -->
+        <h2 class="font-heading text-2xl font-bold text-navy mb-4">{t(locale, 'about.dontDoTitle')}</h2>
+        <p class="text-text-primary leading-relaxed mb-3">{t(locale, 'about.dontDoIntro')}</p>
+        <ul class="text-text-primary leading-relaxed space-y-2 mb-4">
+          {[0, 1, 2].map(i => (
+            <li class="flex items-start gap-2">
+              <span class="text-red-500 shrink-0">✗</span>
+              <span>{t(locale, `about.dontDo${i}`)}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="text-text-muted text-sm">{t(locale, 'about.dontDoNote')}</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaSection
+    headline={t(locale, 'about.ctaHeadline')}
+    subtext={t(locale, 'about.ctaSubtext')}
+    variant="dark"
+    locale={locale}
+  />
+
+</PageLayout>

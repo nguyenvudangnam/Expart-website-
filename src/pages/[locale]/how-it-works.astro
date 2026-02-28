@@ -1,65 +1,45 @@
 ---
-// how-it-works.astro - Premium service explanation page
-import PageLayout from '../layouts/PageLayout.astro';
-import PricingCard from '../components/PricingCard.astro';
-import FaqAccordion from '../components/FaqAccordion.astro';
-import CtaSection from '../components/CtaSection.astro';
-import servicesData from '../data/services.json';
-import { t, getLocaleFromUrl } from '../i18n/utils';
-import type { Locale } from '../i18n/config';
+// [locale]/how-it-works.astro - Localized how-it-works page
+import PageLayout from '../../layouts/PageLayout.astro';
+import PricingCard from '../../components/PricingCard.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import servicesData from '../../data/services.json';
+import { getNonDefaultLocales, t, localizedUrl } from '../../i18n/utils';
+import type { Locale } from '../../i18n/config';
 
-const locale = getLocaleFromUrl(Astro.url);
+export function getStaticPaths() {
+  return getNonDefaultLocales().map(locale => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
 
 const steps = [
-  {
-    number: '01',
-    title: t(locale, 'howItWorks.step0.title'),
-    description: t(locale, 'howItWorks.step0.desc'),
-    icon: '📖',
-  },
-  {
-    number: '02',
-    title: t(locale, 'howItWorks.step1.title'),
-    description: t(locale, 'howItWorks.step1.desc'),
-    icon: '📅',
-  },
-  {
-    number: '03',
-    title: t(locale, 'howItWorks.step2.title'),
-    description: t(locale, 'howItWorks.step2.desc'),
-    icon: '💬',
-  },
-  {
-    number: '04',
-    title: t(locale, 'howItWorks.step3.title'),
-    description: t(locale, 'howItWorks.step3.desc'),
-    icon: '✅',
-  },
+  { number: '01', icon: '📖', titleKey: 'howItWorks.step0.title', descKey: 'howItWorks.step0.desc' },
+  { number: '02', icon: '📅', titleKey: 'howItWorks.step1.title', descKey: 'howItWorks.step1.desc' },
+  { number: '03', icon: '💬', titleKey: 'howItWorks.step2.title', descKey: 'howItWorks.step2.desc' },
+  { number: '04', icon: '✅', titleKey: 'howItWorks.step3.title', descKey: 'howItWorks.step3.desc' },
 ];
 
-// Build pricing data from translations (keep price/currency from services.json)
-const pricingPlans = servicesData.pricing.map(plan => {
-  const key = plan.id as 'consultation' | 'package';
-  const featureCount = key === 'consultation' ? 4 : 6;
-  const features = Array.from({ length: featureCount }, (_, i) =>
-    t(locale, `pricing.${key}.feature${i}`)
-  );
-  return {
-    name: t(locale, `pricing.${key}.name`),
-    price: plan.price,
-    currency: plan.currency,
-    duration: t(locale, `pricing.${key}.duration`),
-    description: t(locale, `pricing.${key}.desc`),
-    features,
-    cta: t(locale, `pricing.${key}.cta`),
-    highlighted: plan.highlighted,
-  };
-});
+// Build translated pricing data
+const pricingPlans = servicesData.pricing.map(plan => ({
+  name: t(locale, `pricing.${plan.id}.name`),
+  price: plan.price,
+  currency: plan.currency,
+  duration: t(locale, `pricing.${plan.id}.duration`),
+  description: t(locale, `pricing.${plan.id}.desc`),
+  features: plan.features.map((_, i) => t(locale, `pricing.${plan.id}.feature${i}`)),
+  cta: t(locale, `pricing.${plan.id}.cta`),
+  highlighted: plan.highlighted,
+}));
 ---
 
 <PageLayout
   title={t(locale, 'howItWorks.title')}
-  description="Book a 60-minute consultation and get clear, actionable legal guidance for your situation in Vietnam. Here's exactly how the process works."
+  description={t(locale, 'howItWorks.subtitle')}
   locale={locale}
 >
 
@@ -84,7 +64,6 @@ const pricingPlans = servicesData.pricing.map(plan => {
       <div class="flex flex-col gap-0">
         {steps.map((step, i) => (
           <div class="flex gap-6 relative">
-            <!-- Timeline line -->
             <div class="flex flex-col items-center shrink-0">
               <div class="w-12 h-12 rounded-full bg-gradient-to-br from-navy to-navy-mid text-white flex items-center justify-center font-mono font-bold text-sm z-10 shadow-[0_4px_15px_rgba(15,35,55,0.2)]">
                 {step.number}
@@ -93,13 +72,12 @@ const pricingPlans = servicesData.pricing.map(plan => {
                 <div class="w-0.5 h-full bg-gradient-to-b from-border to-border-light min-h-[60px]"></div>
               )}
             </div>
-            <!-- Content -->
             <div class="pb-10">
               <div class="flex items-center gap-2 mb-1">
                 <span class="text-xl" aria-hidden="true">{step.icon}</span>
-                <h3 class="font-heading text-lg font-bold text-navy">{step.title}</h3>
+                <h3 class="font-heading text-lg font-bold text-navy">{t(locale, step.titleKey)}</h3>
               </div>
-              <p class="text-text-muted text-sm leading-relaxed">{step.description}</p>
+              <p class="text-text-muted text-sm leading-relaxed">{t(locale, step.descKey)}</p>
             </div>
           </div>
         ))}

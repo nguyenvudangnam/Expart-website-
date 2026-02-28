@@ -1,6 +1,10 @@
 ---
 // PricingCard.astro - Premium pricing card component
+import { t, getLocaleFromUrl, localizedUrl } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+
 interface Props {
+  locale?: Locale;
   name: string;
   price: number;
   currency: string;
@@ -11,6 +15,7 @@ interface Props {
   highlighted?: boolean;
 }
 
+const locale = Astro.props.locale ?? getLocaleFromUrl(Astro.url);
 const { name, price, currency, duration, description, features, cta, highlighted = false } = Astro.props;
 ---
 
@@ -24,7 +29,7 @@ const { name, price, currency, duration, description, features, cta, highlighted
 >
   {highlighted && (
     <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-gold to-gold-bright text-white text-xs font-semibold px-4 py-1 rounded-full shadow-[0_2px_10px_rgba(200,148,74,0.3)]">
-      Most Popular
+      {t(locale, 'pricing.popular')}
     </span>
   )}
 
@@ -53,7 +58,7 @@ const { name, price, currency, duration, description, features, cta, highlighted
   </ul>
 
   <a
-    href="/book"
+    href={localizedUrl(locale, '/book')}
     class:list={[
       'text-center font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 text-sm',
       highlighted

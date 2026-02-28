@@ -1,16 +1,23 @@
 ---
-// book.astro - Premium booking page with Calendly placeholder
-import PageLayout from '../layouts/PageLayout.astro';
-import FaqAccordion from '../components/FaqAccordion.astro';
-import { t, getLocaleFromUrl } from '../i18n/utils';
-import type { Locale } from '../i18n/config';
+// [locale]/book.astro - Localized booking page
+import PageLayout from '../../layouts/PageLayout.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import { getNonDefaultLocales, t, localizedUrl } from '../../i18n/utils';
+import type { Locale } from '../../i18n/config';
 
-const locale = getLocaleFromUrl(Astro.url);
+export function getStaticPaths() {
+  return getNonDefaultLocales().map(locale => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
 ---
 
 <PageLayout
   title={t(locale, 'book.title')}
-  description="Schedule a 60-minute legal consultation for expats in Vietnam. Get clear, actionable answers specific to your situation."
+  description={t(locale, 'book.subtitle')}
   locale={locale}
 >
 
@@ -27,18 +34,11 @@ const locale = getLocaleFromUrl(Astro.url);
 
         <!-- Trust signals -->
         <div class="flex flex-wrap justify-center gap-4 text-sm text-text-muted">
-          <span class="flex items-center gap-1.5">
-            <span class="text-success">✓</span> {t(locale, 'book.trust0')}
-          </span>
-          <span class="flex items-center gap-1.5">
-            <span class="text-success">✓</span> {t(locale, 'book.trust1')}
-          </span>
-          <span class="flex items-center gap-1.5">
-            <span class="text-success">✓</span> {t(locale, 'book.trust2')}
-          </span>
-          <span class="flex items-center gap-1.5">
-            <span class="text-success">✓</span> {t(locale, 'book.trust3')}
-          </span>
+          {[0, 1, 2, 3].map(i => (
+            <span class="flex items-center gap-1.5">
+              <span class="text-success">✓</span> {t(locale, `book.trust${i}`)}
+            </span>
+          ))}
         </div>
       </div>
 
@@ -64,7 +64,6 @@ const locale = getLocaleFromUrl(Astro.url);
               &lt;script src="https://assets.calendly.com/assets/external/widget.js"&gt;&lt;/script&gt;
             </code>
 
-            <!-- Temporary direct CTA -->
             <div class="mt-8 p-4 rounded-xl bg-gradient-to-r from-gold/10 to-gold-bright/5 border border-gold/20">
               <p class="text-sm text-text-primary mb-3">
                 <strong class="text-navy">{t(locale, 'book.emailCta')}</strong> {t(locale, 'book.emailCtaDesc')}
@@ -86,21 +85,13 @@ const locale = getLocaleFromUrl(Astro.url);
           {t(locale, 'book.expectTitle')}
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="card-premium p-5 rounded-xl border border-border-light bg-surface text-center">
-            <span class="text-2xl mb-3 block" aria-hidden="true">📧</span>
-            <h3 class="font-semibold text-navy text-sm mb-1">{t(locale, 'book.expect0.title')}</h3>
-            <p class="text-text-muted text-xs">{t(locale, 'book.expect0.desc')}</p>
-          </div>
-          <div class="card-premium p-5 rounded-xl border border-border-light bg-surface text-center">
-            <span class="text-2xl mb-3 block" aria-hidden="true">💬</span>
-            <h3 class="font-semibold text-navy text-sm mb-1">{t(locale, 'book.expect1.title')}</h3>
-            <p class="text-text-muted text-xs">{t(locale, 'book.expect1.desc')}</p>
-          </div>
-          <div class="card-premium p-5 rounded-xl border border-border-light bg-surface text-center">
-            <span class="text-2xl mb-3 block" aria-hidden="true">✅</span>
-            <h3 class="font-semibold text-navy text-sm mb-1">{t(locale, 'book.expect2.title')}</h3>
-            <p class="text-text-muted text-xs">{t(locale, 'book.expect2.desc')}</p>
-          </div>
+          {[0, 1, 2].map(i => (
+            <div class="card-premium p-5 rounded-xl border border-border-light bg-surface text-center">
+              <span class="text-2xl mb-3 block" aria-hidden="true">{['📧', '💬', '✅'][i]}</span>
+              <h3 class="font-semibold text-navy text-sm mb-1">{t(locale, `book.expect${i}.title`)}</h3>
+              <p class="text-text-muted text-xs">{t(locale, `book.expect${i}.desc`)}</p>
+            </div>
+          ))}
         </div>
       </div>
 
