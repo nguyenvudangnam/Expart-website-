@@ -1,15 +1,15 @@
 ---
-// ReadingProgress.astro - Reading progress bar at top of pillar pages
+// ReadingProgress.astro - Premium gold gradient reading progress bar
 ---
 
 <div
   id="reading-progress"
-  class="fixed top-16 left-0 right-0 z-30 h-1 bg-transparent pointer-events-none"
+  class="fixed top-[4.25rem] left-0 right-0 z-30 h-[3px] bg-transparent pointer-events-none"
   aria-hidden="true"
 >
   <div
     id="reading-progress-bar"
-    class="h-full bg-[#E8913A] transition-[width] duration-100 ease-out"
+    class="h-full bg-gradient-to-r from-gold via-gold-bright to-gold transition-[width] duration-100 ease-out shadow-[0_0_8px_rgba(200,148,74,0.4)]"
     style="width: 0%"
   ></div>
 </div>

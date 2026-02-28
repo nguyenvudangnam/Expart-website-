@@ -1,5 +1,5 @@
 ---
-// resources.astro - Free resources / lead magnets download page
+// resources.astro - Premium free resources page
 import PageLayout from '../layouts/PageLayout.astro';
 import CtaSection from '../components/CtaSection.astro';
 
@@ -47,15 +47,17 @@ const resources = [
   description="Free checklists, flowcharts, and trackers for expats navigating legal processes in Vietnam."
 >
 
-  <section class="section-spacing bg-[#FAFAF8] border-b border-[#E5E7EB]">
+  <section class="section-spacing bg-background relative">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
     <div class="container-page">
 
       <!-- Header -->
       <div class="max-w-3xl mx-auto text-center mb-12">
-        <h1 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-[#1B3A5C] mb-4">
+        <div class="divider-gold mx-auto mb-6"></div>
+        <h1 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-navy mb-4">
           Free Resources
         </h1>
-        <p class="text-lg text-[#6B7280] leading-relaxed">
+        <p class="text-lg text-text-muted leading-relaxed">
           Practical checklists and tools to help you navigate Vietnam's legal system. No sign-up required.
         </p>
       </div>
@@ -63,36 +65,36 @@ const resources = [
       <!-- Resources grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
         {resources.map(resource => (
-          <div class="p-6 rounded-xl border border-[#E5E7EB] bg-white shadow-sm hover:shadow-md transition-all duration-200">
+          <div class="card-premium p-6 rounded-2xl border border-border-light bg-surface">
             <div class="flex items-start gap-4">
-              <span class="text-3xl shrink-0" aria-hidden="true">{resource.icon}</span>
+              <span class="text-3xl shrink-0 w-12 h-12 flex items-center justify-center rounded-xl bg-cream" aria-hidden="true">{resource.icon}</span>
               <div class="flex-1">
                 <!-- Tags -->
                 <div class="flex gap-2 mb-2">
                   {resource.tags.map(tag => (
-                    <span class="text-xs font-medium text-[#1B3A5C] bg-[#1B3A5C]/8 px-2 py-0.5 rounded-full">
+                    <span class="text-xs font-medium text-navy bg-navy/[0.06] px-2 py-0.5 rounded-full">
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                <h2 class="font-heading text-lg font-bold text-[#1B3A5C] mb-1">{resource.title}</h2>
-                <p class="text-[#6B7280] text-sm leading-relaxed mb-4">{resource.description}</p>
+                <h2 class="font-heading text-lg font-bold text-navy mb-1">{resource.title}</h2>
+                <p class="text-text-muted text-sm leading-relaxed mb-4">{resource.description}</p>
 
                 <div class="flex flex-wrap gap-2">
-                  <!-- Email capture placeholder for download -->
-                  <div class="w-full p-3 rounded-lg bg-[#FAFAF8] border border-[#E5E7EB]">
-                    <p class="text-xs text-[#6B7280] mb-2">Get this resource sent to your email:</p>
+                  <!-- Email capture placeholder -->
+                  <div class="w-full p-3 rounded-lg bg-cream/50 border border-border-light">
+                    <p class="text-xs text-text-muted mb-2">Get this resource sent to your email:</p>
                     <form class="flex gap-2" onsubmit="return false;">
                       <input
                         type="email"
                         placeholder="your@email.com"
-                        class="flex-1 text-sm px-3 py-2 rounded-lg border border-[#E5E7EB] bg-white text-[#2D2D2D] placeholder:text-[#6B7280]/60 focus:outline-none focus:border-[#E8913A]"
+                        class="flex-1 text-sm px-3 py-2 rounded-lg border border-border-light bg-surface text-text-primary placeholder:text-text-muted/60 focus:outline-none focus:border-gold transition-colors"
                         aria-label="Email address"
                       />
                       <button
                         type="submit"
-                        class="shrink-0 bg-[#1B3A5C] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-[#1B3A5C]/90 transition-all duration-200"
+                        class="shrink-0 bg-navy text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-navy-light transition-all duration-200"
                       >
                         Send
                       </button>
@@ -101,7 +103,7 @@ const resources = [
 
                   <a
                     href={resource.relatedGuide}
-                    class="text-xs text-[#E8913A] font-medium hover:underline transition-colors"
+                    class="text-xs text-gold font-medium hover:text-navy hover:underline transition-colors"
                   >
                     Read the full guide →
                   </a>

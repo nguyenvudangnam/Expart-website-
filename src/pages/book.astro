@@ -1,5 +1,5 @@
 ---
-// book.astro - Booking page with Calendly placeholder embed
+// book.astro - Premium booking page with Calendly placeholder
 import PageLayout from '../layouts/PageLayout.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
 ---
@@ -9,29 +9,30 @@ import FaqAccordion from '../components/FaqAccordion.astro';
   description="Schedule a 60-minute legal consultation for expats in Vietnam. Get clear, actionable answers specific to your situation."
 >
 
-  <section class="section-spacing bg-[#FAFAF8]">
+  <section class="section-spacing bg-background">
     <div class="container-page">
       <div class="max-w-3xl mx-auto text-center mb-10">
-        <h1 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-[#1B3A5C] mb-4">
+        <div class="divider-gold mx-auto mb-6"></div>
+        <h1 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-navy mb-4">
           Book Your Consultation
         </h1>
-        <p class="text-lg text-[#6B7280] leading-relaxed mb-6">
+        <p class="text-lg text-text-muted leading-relaxed mb-6">
           Pick a time that works for you. You'll get a confirmation email with a brief intake form so I can prepare for our call.
         </p>
 
         <!-- Trust signals -->
-        <div class="flex flex-wrap justify-center gap-4 text-sm text-[#6B7280]">
+        <div class="flex flex-wrap justify-center gap-4 text-sm text-text-muted">
           <span class="flex items-center gap-1.5">
-            <span class="text-[#059669]">✓</span> 60 minutes
+            <span class="text-success">✓</span> 60 minutes
           </span>
           <span class="flex items-center gap-1.5">
-            <span class="text-[#059669]">✓</span> $150 USD
+            <span class="text-success">✓</span> $150 USD
           </span>
           <span class="flex items-center gap-1.5">
-            <span class="text-[#059669]">✓</span> Written follow-up
+            <span class="text-success">✓</span> Written follow-up
           </span>
           <span class="flex items-center gap-1.5">
-            <span class="text-[#059669]">✓</span> English only
+            <span class="text-success">✓</span> English only
           </span>
         </div>
       </div>
@@ -40,18 +41,17 @@ import FaqAccordion from '../components/FaqAccordion.astro';
       <div class="max-w-3xl mx-auto mb-12">
         <div
           id="calendly-embed"
-          class="bg-white rounded-xl border border-[#E5E7EB] shadow-sm overflow-hidden min-h-[600px] flex items-center justify-center"
+          class="bg-surface rounded-2xl border border-border-light shadow-[0_1px_3px_rgba(0,0,0,0.04)] overflow-hidden min-h-[600px] flex items-center justify-center"
         >
-          <!-- Replace this placeholder with actual Calendly widget -->
           <div class="text-center p-12">
-            <div class="w-16 h-16 rounded-full bg-[#1B3A5C]/10 flex items-center justify-center mx-auto mb-4">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-navy/10 to-gold/10 flex items-center justify-center mx-auto mb-4">
               <span class="text-3xl" aria-hidden="true">📅</span>
             </div>
-            <h2 class="font-heading text-xl font-bold text-[#1B3A5C] mb-2">Calendly Widget Goes Here</h2>
-            <p class="text-[#6B7280] text-sm mb-6 max-w-md mx-auto">
+            <h2 class="font-heading text-xl font-bold text-navy mb-2">Calendly Widget Goes Here</h2>
+            <p class="text-text-muted text-sm mb-6 max-w-md mx-auto">
               Replace this placeholder with your Calendly embed code. Add the following script to activate:
             </p>
-            <code class="text-xs bg-[#FAFAF8] text-[#1B3A5C] px-4 py-2 rounded-lg border border-[#E5E7EB] font-mono block max-w-lg mx-auto text-left">
+            <code class="text-xs bg-cream text-navy px-4 py-2 rounded-lg border border-border-light font-mono block max-w-lg mx-auto text-left">
               &lt;div class="calendly-inline-widget"<br/>
               &nbsp;&nbsp;data-url="https://calendly.com/YOUR-LINK"<br/>
               &nbsp;&nbsp;style="min-width:320px;height:700px;"&gt;<br/>
@@ -59,14 +59,14 @@ import FaqAccordion from '../components/FaqAccordion.astro';
               &lt;script src="https://assets.calendly.com/assets/external/widget.js"&gt;&lt;/script&gt;
             </code>
 
-            <!-- Temporary direct CTA while Calendly isn't set up -->
-            <div class="mt-8 p-4 rounded-xl bg-[#E8913A]/10 border border-[#E8913A]/30">
-              <p class="text-sm text-[#2D2D2D] mb-3">
-                <strong>In the meantime:</strong> Send an email to book your consultation.
+            <!-- Temporary direct CTA -->
+            <div class="mt-8 p-4 rounded-xl bg-gradient-to-r from-gold/10 to-gold-bright/5 border border-gold/20">
+              <p class="text-sm text-text-primary mb-3">
+                <strong class="text-navy">In the meantime:</strong> Send an email to book your consultation.
               </p>
               <a
                 href="mailto:hello@expatlegalvietnam.com?subject=Consultation%20Booking%20Request"
-                class="inline-flex items-center gap-2 bg-[#E8913A] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-amber-500 transition-all duration-200"
+                class="inline-flex items-center gap-2 btn-gold text-white text-sm font-semibold px-5 py-2.5 rounded-lg"
               >
                 Email to Book →
               </a>
@@ -77,31 +77,31 @@ import FaqAccordion from '../components/FaqAccordion.astro';
 
       <!-- What to expect -->
       <div class="max-w-3xl mx-auto mb-12">
-        <h2 class="font-heading text-2xl font-bold text-[#1B3A5C] mb-6 text-center">
+        <h2 class="font-heading text-2xl font-bold text-navy mb-6 text-center">
           What to expect after booking
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="p-5 rounded-xl border border-[#E5E7EB] bg-white text-center">
+          <div class="card-premium p-5 rounded-xl border border-border-light bg-surface text-center">
             <span class="text-2xl mb-3 block" aria-hidden="true">📧</span>
-            <h3 class="font-semibold text-[#1B3A5C] text-sm mb-1">Confirmation + Intake Form</h3>
-            <p class="text-[#6B7280] text-xs">Brief form so I can prepare for your specific situation.</p>
+            <h3 class="font-semibold text-navy text-sm mb-1">Confirmation + Intake Form</h3>
+            <p class="text-text-muted text-xs">Brief form so I can prepare for your specific situation.</p>
           </div>
-          <div class="p-5 rounded-xl border border-[#E5E7EB] bg-white text-center">
+          <div class="card-premium p-5 rounded-xl border border-border-light bg-surface text-center">
             <span class="text-2xl mb-3 block" aria-hidden="true">💬</span>
-            <h3 class="font-semibold text-[#1B3A5C] text-sm mb-1">60-Min Call</h3>
-            <p class="text-[#6B7280] text-xs">Video or voice call. Clear answers, no jargon.</p>
+            <h3 class="font-semibold text-navy text-sm mb-1">60-Min Call</h3>
+            <p class="text-text-muted text-xs">Video or voice call. Clear answers, no jargon.</p>
           </div>
-          <div class="p-5 rounded-xl border border-[#E5E7EB] bg-white text-center">
+          <div class="card-premium p-5 rounded-xl border border-border-light bg-surface text-center">
             <span class="text-2xl mb-3 block" aria-hidden="true">✅</span>
-            <h3 class="font-semibold text-[#1B3A5C] text-sm mb-1">Written Summary</h3>
-            <p class="text-[#6B7280] text-xs">Action plan email within 24h + 48h email follow-up.</p>
+            <h3 class="font-semibold text-navy text-sm mb-1">Written Summary</h3>
+            <p class="text-text-muted text-xs">Action plan email within 24h + 48h email follow-up.</p>
           </div>
         </div>
       </div>
 
       <!-- FAQ section -->
       <div class="max-w-3xl mx-auto">
-        <h2 class="font-heading text-2xl font-bold text-[#1B3A5C] mb-6 text-center">
+        <h2 class="font-heading text-2xl font-bold text-navy mb-6 text-center">
           Common Questions
         </h2>
         <FaqAccordion />

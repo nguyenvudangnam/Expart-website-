@@ -1,43 +1,45 @@
 ---
-// Testimonials.astro - Client testimonials (hidden until enabled in data file)
+// Testimonials.astro - Premium client testimonials (hidden until enabled)
 import testimonialsData from '../data/testimonials.json';
 
 const { enabled, items } = testimonialsData;
 ---
 
 {enabled && (
-  <section id="testimonials" class="section-spacing bg-white border-b border-[#E5E7EB]">
+  <section id="testimonials" class="section-spacing bg-surface relative">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
     <div class="container-page">
       <div class="text-center max-w-2xl mx-auto mb-12">
-        <h2 class="font-heading text-3xl md:text-4xl font-bold text-[#1B3A5C] mb-4">
+        <div class="divider-gold mx-auto mb-6"></div>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-navy mb-4">
           What expats are saying
         </h2>
-        <p class="text-[#6B7280] text-lg">
+        <p class="text-text-muted text-lg">
           Real results from real people who were exactly where you are.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
         {items.map(item => (
-          <div class="p-6 rounded-xl border border-[#E5E7EB] bg-[#FAFAF8] shadow-sm">
+          <div class="card-premium p-6 rounded-2xl border border-border-light bg-cream/50">
             <!-- Stars -->
             <div class="flex gap-1 mb-4" aria-label={`${item.rating} out of 5 stars`}>
               {Array.from({ length: item.rating }).map(() => (
-                <span class="text-[#E8913A]" aria-hidden="true">★</span>
+                <span class="text-gold" aria-hidden="true">★</span>
               ))}
             </div>
             <!-- Quote -->
-            <blockquote class="text-[#2D2D2D] text-sm leading-relaxed mb-5 font-body">
+            <blockquote class="text-text-primary text-sm leading-relaxed mb-5">
               "{item.text}"
             </blockquote>
             <!-- Attribution -->
             <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded-full bg-[#1B3A5C] flex items-center justify-center text-white text-sm font-semibold shrink-0">
+              <div class="w-9 h-9 rounded-full bg-gradient-to-br from-navy to-navy-light flex items-center justify-center text-white text-sm font-semibold shrink-0">
                 {item.name.charAt(0)}
               </div>
               <div>
-                <p class="font-semibold text-[#1B3A5C] text-sm">{item.name}</p>
-                <p class="text-[#6B7280] text-xs">{item.role} · {item.country}</p>
+                <p class="font-semibold text-navy text-sm">{item.name}</p>
+                <p class="text-text-muted text-xs">{item.role} · {item.country}</p>
               </div>
             </div>
           </div>

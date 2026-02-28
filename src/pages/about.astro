@@ -1,5 +1,5 @@
 ---
-// about.astro - About page with profile, credentials, personal quote
+// about.astro - Premium about page
 import PageLayout from '../layouts/PageLayout.astro';
 import CtaSection from '../components/CtaSection.astro';
 ---
@@ -9,75 +9,77 @@ import CtaSection from '../components/CtaSection.astro';
   description="Meet the person behind Expat Legal Vietnam. Background, credentials, and why this service exists."
 >
 
-  <section class="section-spacing bg-[#FAFAF8] border-b border-[#E5E7EB]">
+  <section class="section-spacing bg-background relative">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
     <div class="container-page">
       <div class="max-w-3xl mx-auto">
 
         <!-- Profile section -->
         <div class="flex flex-col md:flex-row gap-8 items-start mb-12">
           <!-- Profile image placeholder -->
-          <div class="w-32 h-32 md:w-40 md:h-40 rounded-xl bg-[#1B3A5C] flex items-center justify-center text-white text-4xl shrink-0" aria-label="Profile photo placeholder">
+          <div class="w-32 h-32 md:w-40 md:h-40 rounded-2xl bg-gradient-to-br from-navy to-navy-mid flex items-center justify-center text-white text-4xl shrink-0 shadow-[0_4px_20px_rgba(15,35,55,0.2)]" aria-label="Profile photo placeholder">
             👤
           </div>
 
           <div>
-            <h1 class="font-heading text-3xl md:text-4xl font-bold text-[#1B3A5C] mb-2">
+            <div class="divider-gold mb-4"></div>
+            <h1 class="font-heading text-3xl md:text-4xl font-bold text-navy mb-2">
               About Expat Legal Vietnam
             </h1>
-            <p class="text-[#E8913A] font-semibold mb-4">Legal Consultant for Expats in Vietnam</p>
-            <p class="text-[#6B7280] leading-relaxed">
+            <p class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-bright font-semibold mb-4">Legal Consultant for Expats in Vietnam</p>
+            <p class="text-text-muted leading-relaxed">
               I've been helping expats navigate Vietnam's legal system for years. I know the frustration of dealing with confusing regulations, Vietnamese-only documents, and advice from Facebook that may or may not be accurate.
             </p>
           </div>
         </div>
 
         <!-- Personal quote -->
-        <blockquote class="border-l-4 border-[#E8913A] pl-6 py-4 my-8 bg-white rounded-r-xl">
-          <p class="text-[#1B3A5C] font-heading text-lg md:text-xl italic leading-relaxed">
+        <blockquote class="border-l-4 border-gold pl-6 py-4 my-8 bg-surface rounded-r-xl shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
+          <p class="text-navy font-heading text-lg md:text-xl italic leading-relaxed">
             "I started this service because I saw too many expats making expensive mistakes that could have been avoided with 60 minutes of clear guidance."
           </p>
         </blockquote>
 
         <!-- Why this exists -->
-        <h2 class="font-heading text-2xl font-bold text-[#1B3A5C] mb-4">Why this service exists</h2>
-        <p class="text-[#2D2D2D] leading-relaxed mb-4">
+        <h2 class="font-heading text-2xl font-bold text-navy mb-4">Why this service exists</h2>
+        <p class="text-text-primary leading-relaxed mb-4">
           When expats in Vietnam need legal guidance, they face a frustrating reality: information online is outdated, scattered across Facebook groups, or written in Vietnamese. Law firms charge retainers for simple questions. And Google doesn't know about the latest regulatory changes.
         </p>
-        <p class="text-[#2D2D2D] leading-relaxed mb-8">
+        <p class="text-text-primary leading-relaxed mb-8">
           Expat Legal Vietnam fills that gap. One focused consultation. Plain English. Specific to your situation. You leave with an action plan, not more confusion.
         </p>
 
         <!-- Credentials -->
-        <h2 class="font-heading text-2xl font-bold text-[#1B3A5C] mb-4">Credentials & Experience</h2>
+        <h2 class="font-heading text-2xl font-bold text-navy mb-4">Credentials & Experience</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-          <div class="p-4 rounded-xl border border-[#E5E7EB] bg-white">
+          <div class="card-premium p-4 rounded-xl border border-border-light bg-surface">
             <p class="text-2xl mb-2" aria-hidden="true">🎓</p>
-            <h3 class="font-semibold text-[#1B3A5C] text-sm mb-1">Legal Education</h3>
-            <p class="text-[#6B7280] text-sm">Degree in Law with focus on international business regulation and cross-border legal matters.</p>
+            <h3 class="font-semibold text-navy text-sm mb-1">Legal Education</h3>
+            <p class="text-text-muted text-sm">Degree in Law with focus on international business regulation and cross-border legal matters.</p>
           </div>
-          <div class="p-4 rounded-xl border border-[#E5E7EB] bg-white">
+          <div class="card-premium p-4 rounded-xl border border-border-light bg-surface">
             <p class="text-2xl mb-2" aria-hidden="true">🇻🇳</p>
-            <h3 class="font-semibold text-[#1B3A5C] text-sm mb-1">Vietnam Experience</h3>
-            <p class="text-[#6B7280] text-sm">Years of on-the-ground experience navigating Vietnamese bureaucracy for foreign clients.</p>
+            <h3 class="font-semibold text-navy text-sm mb-1">Vietnam Experience</h3>
+            <p class="text-text-muted text-sm">Years of on-the-ground experience navigating Vietnamese bureaucracy for foreign clients.</p>
           </div>
-          <div class="p-4 rounded-xl border border-[#E5E7EB] bg-white">
+          <div class="card-premium p-4 rounded-xl border border-border-light bg-surface">
             <p class="text-2xl mb-2" aria-hidden="true">🌏</p>
-            <h3 class="font-semibold text-[#1B3A5C] text-sm mb-1">Expat Network</h3>
-            <p class="text-[#6B7280] text-sm">Connected with trusted local attorneys, translators, and government liaisons for complex cases.</p>
+            <h3 class="font-semibold text-navy text-sm mb-1">Expat Network</h3>
+            <p class="text-text-muted text-sm">Connected with trusted local attorneys, translators, and government liaisons for complex cases.</p>
           </div>
-          <div class="p-4 rounded-xl border border-[#E5E7EB] bg-white">
+          <div class="card-premium p-4 rounded-xl border border-border-light bg-surface">
             <p class="text-2xl mb-2" aria-hidden="true">🗣️</p>
-            <h3 class="font-semibold text-[#1B3A5C] text-sm mb-1">Languages</h3>
-            <p class="text-[#6B7280] text-sm">All consultations conducted in English. Vietnamese proficiency for document review and official interactions.</p>
+            <h3 class="font-semibold text-navy text-sm mb-1">Languages</h3>
+            <p class="text-text-muted text-sm">All consultations conducted in English. Vietnamese proficiency for document review and official interactions.</p>
           </div>
         </div>
 
         <!-- What I don't do -->
-        <h2 class="font-heading text-2xl font-bold text-[#1B3A5C] mb-4">What I don't do</h2>
-        <p class="text-[#2D2D2D] leading-relaxed mb-3">
+        <h2 class="font-heading text-2xl font-bold text-navy mb-4">What I don't do</h2>
+        <p class="text-text-primary leading-relaxed mb-3">
           Transparency matters. Here's what this service is NOT:
         </p>
-        <ul class="text-[#2D2D2D] leading-relaxed space-y-2 mb-4">
+        <ul class="text-text-primary leading-relaxed space-y-2 mb-4">
           <li class="flex items-start gap-2">
             <span class="text-red-500 shrink-0">✗</span>
             <span>Not a law firm — I don't represent clients in court</span>
@@ -91,7 +93,7 @@ import CtaSection from '../components/CtaSection.astro';
             <span>Not a document processor — I guide you through the process, step by step</span>
           </li>
         </ul>
-        <p class="text-[#6B7280] text-sm">
+        <p class="text-text-muted text-sm">
           For formal legal representation, court matters, or complex corporate structures, I work with a network of trusted local attorneys and can refer you to the right person.
         </p>
       </div>

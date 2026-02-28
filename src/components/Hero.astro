@@ -1,48 +1,78 @@
 ---
-// Hero.astro - Homepage hero section
+// Hero.astro - Premium homepage hero with dramatic gradient
 ---
 
-<section id="hero" class="bg-[#FAFAF8] section-spacing border-b border-[#E5E7EB]">
-  <div class="container-page">
-    <div class="max-w-3xl mx-auto text-center">
+<section id="hero" class="relative overflow-hidden grain">
+  <!-- Layered gradient background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-navy via-navy-mid to-navy-light"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(200,148,74,0.15)_0%,_transparent_60%)]"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(26,58,92,0.5)_0%,_transparent_60%)]"></div>
 
-      <!-- Trust badge -->
-      <div class="inline-flex items-center gap-2 bg-[#1B3A5C]/8 text-[#1B3A5C] text-sm font-medium px-4 py-1.5 rounded-full mb-6">
-        <span>🇻🇳</span>
-        <span>Legal Guidance for Expats in Vietnam</span>
+  <!-- Subtle geometric accent -->
+  <div class="absolute top-0 right-0 w-96 h-96 opacity-[0.03]" aria-hidden="true">
+    <svg viewBox="0 0 400 400" fill="none">
+      <circle cx="350" cy="50" r="300" stroke="currentColor" stroke-width="0.5" class="text-gold"/>
+      <circle cx="350" cy="50" r="200" stroke="currentColor" stroke-width="0.5" class="text-gold"/>
+      <circle cx="350" cy="50" r="100" stroke="currentColor" stroke-width="0.5" class="text-gold"/>
+    </svg>
+  </div>
+
+  <div class="relative section-spacing">
+    <div class="container-page">
+      <div class="max-w-3xl mx-auto text-center">
+
+        <!-- Trust badge -->
+        <div class="animate-fade-up inline-flex items-center gap-2.5 bg-white/[0.08] backdrop-blur-sm text-gold-pale text-sm font-medium px-5 py-2 rounded-full mb-8 border border-white/[0.06]">
+          <span class="w-2 h-2 rounded-full bg-success animate-pulse"></span>
+          <span>Legal Guidance for Expats in Vietnam</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="animate-fade-up font-heading text-4xl md:text-5xl lg:text-[3.5rem] xl:text-[4rem] font-bold text-white leading-[1.1] mb-6" style="animation-delay: 0.1s">
+          Navigate Vietnam's Legal System
+          <span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-bright to-gold"> Without the Confusion</span>
+        </h1>
+
+        <!-- Subheadline -->
+        <p class="animate-fade-up text-lg md:text-xl text-white/60 leading-relaxed mb-10 max-w-2xl mx-auto" style="animation-delay: 0.2s">
+          Plain-English answers to your visa, renting, business, and family legal questions — from someone who actually knows Vietnam's system.
+        </p>
+
+        <!-- CTA group -->
+        <div class="animate-fade-up flex flex-col sm:flex-row gap-4 justify-center items-center" style="animation-delay: 0.3s">
+          <a
+            href="/book"
+            class="w-full sm:w-auto btn-gold inline-flex items-center justify-center gap-2 text-white font-semibold px-8 py-4 rounded-xl text-base"
+          >
+            Book a 60-Min Consultation — $150
+          </a>
+          <a
+            href="#guides"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-white/80 font-semibold px-8 py-4 rounded-xl border border-white/20 hover:border-white/40 hover:bg-white/[0.06] transition-all duration-300 text-base backdrop-blur-sm"
+          >
+            Read Free Guides ↓
+          </a>
+        </div>
+
+        <!-- Social proof -->
+        <div class="animate-fade-up mt-10 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-white/40" style="animation-delay: 0.4s">
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            English-speaking
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Response within 24h
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            No jargon
+          </span>
+        </div>
       </div>
-
-      <!-- Headline -->
-      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-[#1B3A5C] leading-tight mb-6">
-        Navigate Vietnam's Legal System
-        <span class="text-[#E8913A] italic"> Without the Confusion</span>
-      </h1>
-
-      <!-- Subheadline -->
-      <p class="text-lg md:text-xl text-[#6B7280] leading-relaxed mb-8 max-w-2xl mx-auto">
-        Plain-English answers to your visa, renting, business, and family legal questions — from someone who actually knows Vietnam's system.
-      </p>
-
-      <!-- CTA group -->
-      <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
-        <a
-          href="/book"
-          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#E8913A] text-white font-semibold px-7 py-4 rounded-xl hover:bg-amber-500 transition-all duration-200 shadow-sm hover:shadow-md text-base"
-        >
-          Book a 60-Min Consultation — $150
-        </a>
-        <a
-          href="#guides"
-          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-[#1B3A5C] font-semibold px-7 py-4 rounded-xl border border-[#E5E7EB] hover:border-[#1B3A5C] transition-all duration-200 text-base bg-white"
-        >
-          Read Free Guides ↓
-        </a>
-      </div>
-
-      <!-- Social proof micro-copy -->
-      <p class="mt-6 text-sm text-[#6B7280]">
-        ✓ English-speaking &nbsp;·&nbsp; ✓ Response within 24h &nbsp;·&nbsp; ✓ No jargon
-      </p>
     </div>
   </div>
+
+  <!-- Bottom fade transition -->
+  <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent"></div>
 </section>

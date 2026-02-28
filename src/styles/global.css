@@ -1,21 +1,25 @@
 @import "tailwindcss";
 
 /* =============================================
-   DESIGN TOKENS - Custom colors & typography
+   DESIGN TOKENS — "Refined Authority" palette
    ============================================= */
 @theme {
-  /* Brand colors */
-  --color-navy: #1B3A5C;
-  --color-amber: #E8913A;
+  --color-navy: #0F2337;
+  --color-navy-light: #1A3A5C;
+  --color-navy-mid: #142D47;
+  --color-gold: #C8944A;
+  --color-gold-bright: #DEAA5E;
+  --color-gold-pale: #F5DEB3;
   --color-surface: #FFFFFF;
-  --color-background: #FAFAF8;
-  --color-text-primary: #2D2D2D;
-  --color-text-muted: #6B7280;
-  --color-success: #059669;
-  --color-border: #E5E7EB;
+  --color-background: #F7F5F2;
+  --color-cream: #F0ECE5;
+  --color-text-primary: #1A1A1A;
+  --color-text-muted: #5C6370;
+  --color-success: #2A9D6E;
+  --color-border: #DDD8D0;
+  --color-border-light: #EAE6DF;
 
-  /* Font families */
-  --font-heading: 'Source Serif 4', Georgia, serif;
+  --font-heading: 'Playfair Display', Georgia, serif;
   --font-body: 'DM Sans', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
@@ -28,11 +32,14 @@ html {
   font-family: var(--font-body);
   color: var(--color-text-primary);
   background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  line-height: 1.2;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 
 /* =============================================
@@ -66,8 +73,56 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Focus styles for accessibility */
+/* =============================================
+   PREMIUM EFFECTS
+   ============================================= */
+.grain { position: relative; }
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px;
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #C8944A 0%, #DEAA5E 50%, #C8944A 100%);
+  background-size: 200% 200%;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 20px rgba(200, 148, 74, 0.3);
+}
+.btn-gold:hover {
+  background-position: 100% 0;
+  box-shadow: 0 6px 30px rgba(200, 148, 74, 0.45);
+  transform: translateY(-1px);
+}
+
+.card-premium {
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.card-premium:hover {
+  box-shadow: 0 12px 40px rgba(15, 35, 55, 0.1);
+  transform: translateY(-3px);
+}
+
+.divider-gold {
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, #C8944A, #DEAA5E);
+  border-radius: 2px;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fadeUp 0.7s ease-out both; }
+
 :focus-visible {
-  outline: 2px solid var(--color-amber);
+  outline: 2px solid var(--color-gold);
   outline-offset: 2px;
 }

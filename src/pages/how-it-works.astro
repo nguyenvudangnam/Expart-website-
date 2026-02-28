@@ -1,5 +1,5 @@
 ---
-// how-it-works.astro - Service explanation page with steps, pricing, FAQ
+// how-it-works.astro - Premium service explanation page
 import PageLayout from '../layouts/PageLayout.astro';
 import PricingCard from '../components/PricingCard.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
@@ -40,39 +40,42 @@ const steps = [
 >
 
   <!-- Hero -->
-  <section class="section-spacing bg-[#FAFAF8] border-b border-[#E5E7EB]">
+  <section class="section-spacing bg-background relative">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
     <div class="container-page text-center max-w-3xl mx-auto">
-      <h1 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-[#1B3A5C] mb-4">
+      <div class="divider-gold mx-auto mb-6"></div>
+      <h1 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-navy mb-4">
         How It Works
       </h1>
-      <p class="text-lg text-[#6B7280] leading-relaxed">
+      <p class="text-lg text-text-muted leading-relaxed">
         From confusion to clarity in 4 simple steps. No commitment until you book.
       </p>
     </div>
   </section>
 
   <!-- Steps timeline -->
-  <section id="steps" class="section-spacing bg-white border-b border-[#E5E7EB]">
+  <section id="steps" class="section-spacing bg-surface relative">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
     <div class="container-page max-w-3xl mx-auto">
       <div class="flex flex-col gap-0">
         {steps.map((step, i) => (
           <div class="flex gap-6 relative">
             <!-- Timeline line -->
             <div class="flex flex-col items-center shrink-0">
-              <div class="w-12 h-12 rounded-full bg-[#1B3A5C] text-white flex items-center justify-center font-mono font-bold text-sm z-10">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-navy to-navy-mid text-white flex items-center justify-center font-mono font-bold text-sm z-10 shadow-[0_4px_15px_rgba(15,35,55,0.2)]">
                 {step.number}
               </div>
               {i < steps.length - 1 && (
-                <div class="w-0.5 h-full bg-[#E5E7EB] min-h-[60px]"></div>
+                <div class="w-0.5 h-full bg-gradient-to-b from-border to-border-light min-h-[60px]"></div>
               )}
             </div>
             <!-- Content -->
             <div class="pb-10">
               <div class="flex items-center gap-2 mb-1">
                 <span class="text-xl" aria-hidden="true">{step.icon}</span>
-                <h3 class="font-heading text-lg font-bold text-[#1B3A5C]">{step.title}</h3>
+                <h3 class="font-heading text-lg font-bold text-navy">{step.title}</h3>
               </div>
-              <p class="text-[#6B7280] text-sm leading-relaxed">{step.description}</p>
+              <p class="text-text-muted text-sm leading-relaxed">{step.description}</p>
             </div>
           </div>
         ))}
@@ -81,13 +84,15 @@ const steps = [
   </section>
 
   <!-- Pricing -->
-  <section id="pricing" class="section-spacing bg-[#FAFAF8] border-b border-[#E5E7EB]">
+  <section id="pricing" class="section-spacing bg-background relative">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
     <div class="container-page">
       <div class="text-center max-w-2xl mx-auto mb-12">
-        <h2 class="font-heading text-3xl md:text-4xl font-bold text-[#1B3A5C] mb-4">
+        <div class="divider-gold mx-auto mb-6"></div>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-navy mb-4">
           Simple, transparent pricing
         </h2>
-        <p class="text-[#6B7280] text-lg">
+        <p class="text-text-muted text-lg">
           No hidden fees. No retainers. Pay for what you need.
         </p>
       </div>
@@ -110,13 +115,15 @@ const steps = [
   </section>
 
   <!-- FAQ -->
-  <section id="faq" class="section-spacing bg-white border-b border-[#E5E7EB]">
+  <section id="faq" class="section-spacing bg-surface relative">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
     <div class="container-page max-w-3xl mx-auto">
       <div class="text-center mb-10">
-        <h2 class="font-heading text-3xl md:text-4xl font-bold text-[#1B3A5C] mb-4">
+        <div class="divider-gold mx-auto mb-6"></div>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-navy mb-4">
           Frequently Asked Questions
         </h2>
-        <p class="text-[#6B7280] text-lg">
+        <p class="text-text-muted text-lg">
           Quick answers to common questions about the consultation process.
         </p>
       </div>

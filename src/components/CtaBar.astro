@@ -1,19 +1,23 @@
 ---
-// CtaBar.astro - Sticky bottom CTA bar for mobile (hidden on desktop)
+// CtaBar.astro - Premium sticky bottom CTA bar for mobile
 ---
 
 <div
   id="cta-bar"
-  class="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-[#1B3A5C] border-t border-white/10 shadow-lg"
+  class="fixed bottom-0 left-0 right-0 z-40 md:hidden transition-all duration-300"
   aria-label="Book a consultation"
 >
-  <div class="flex items-center justify-between px-4 py-3 gap-3">
-    <p class="text-white text-sm font-medium leading-tight">
-      Need help? <span class="text-[#E8913A]">Book a 60-min call</span>
+  <!-- Glassmorphism background -->
+  <div class="absolute inset-0 bg-navy/95 backdrop-blur-xl border-t border-white/[0.08]"></div>
+  <div class="absolute inset-0 shadow-[0_-4px_30px_rgba(0,0,0,0.2)]"></div>
+
+  <div class="relative flex items-center justify-between px-4 py-3.5 gap-3">
+    <p class="text-white/70 text-sm font-medium leading-tight">
+      Need help? <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-bright font-semibold">Book a 60-min call</span>
     </p>
     <a
       href="/book"
-      class="shrink-0 bg-[#E8913A] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-amber-500 transition-all duration-200"
+      class="shrink-0 btn-gold text-white text-sm font-semibold px-5 py-2.5 rounded-lg"
     >
       Book Now →
     </a>
@@ -21,18 +25,29 @@
 </div>
 
 <!-- Spacer so content doesn't hide behind sticky bar on mobile -->
-<div class="h-[60px] md:hidden" aria-hidden="true"></div>
+<div class="h-[64px] md:hidden" aria-hidden="true"></div>
 
 <script>
   // Hide CTA bar when user scrolls near top (they can see the nav CTA)
   const ctaBar = document.getElementById('cta-bar');
   if (ctaBar) {
+    let lastScroll = 0;
     window.addEventListener('scroll', () => {
-      if (window.scrollY < 100) {
-        ctaBar.classList.add('opacity-0', 'pointer-events-none');
+      const currentScroll = window.scrollY;
+
+      if (currentScroll < 100) {
+        ctaBar.style.transform = 'translateY(100%)';
+        ctaBar.style.opacity = '0';
       } else {
-        ctaBar.classList.remove('opacity-0', 'pointer-events-none');
+        ctaBar.style.transform = 'translateY(0)';
+        ctaBar.style.opacity = '1';
       }
+
+      lastScroll = currentScroll;
     }, { passive: true });
+
+    // Start hidden
+    ctaBar.style.transform = 'translateY(100%)';
+    ctaBar.style.opacity = '0';
   }
 </script>

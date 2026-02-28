@@ -1,5 +1,5 @@
 ---
-// CtaSection.astro - Final CTA section for homepage and pillar pages
+// CtaSection.astro - Premium CTA section with dramatic visual impact
 interface Props {
   headline?: string;
   subtext?: string;
@@ -20,42 +20,74 @@ const isDark = variant === 'dark';
 <section
   id="cta"
   class:list={[
-    'section-spacing',
-    isDark ? 'bg-[#1B3A5C] text-white' : 'bg-[#FAFAF8] text-[#1B3A5C] border-t border-[#E5E7EB]',
+    'relative overflow-hidden',
+    isDark ? 'grain' : '',
   ]}
 >
-  <div class="container-page">
-    <div class="max-w-2xl mx-auto text-center">
-      <h2 class:list={['font-heading text-3xl md:text-4xl font-bold mb-4', isDark ? 'text-white' : 'text-[#1B3A5C]']}>
-        {headline}
-      </h2>
-      <p class:list={['text-lg mb-8', isDark ? 'text-white/70' : 'text-[#6B7280]']}>
-        {subtext}
-      </p>
-      <div class="flex flex-col sm:flex-row gap-3 justify-center">
-        <a
-          href="/book"
-          class="inline-flex items-center justify-center gap-2 bg-[#E8913A] text-white font-semibold px-8 py-4 rounded-xl hover:bg-amber-500 transition-all duration-200 shadow-sm hover:shadow-md text-base"
-        >
-          {ctaLabel}
-        </a>
-        <a
-          href="/how-it-works"
-          class:list={[
-            'inline-flex items-center justify-center gap-2 font-semibold px-8 py-4 rounded-xl border transition-all duration-200 text-base',
-            isDark
-              ? 'border-white/30 text-white hover:border-white hover:bg-white/10'
-              : 'border-[#E5E7EB] text-[#1B3A5C] hover:border-[#1B3A5C]',
-          ]}
-        >
-          See how it works
-        </a>
-      </div>
+  {isDark ? (
+    <!-- Dark variant: rich gradient background -->
+    <Fragment>
+      <div class="absolute inset-0 bg-gradient-to-br from-navy via-navy-mid to-navy-light"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(200,148,74,0.1)_0%,_transparent_70%)]"></div>
+    </Fragment>
+  ) : (
+    <!-- Light variant: warm cream with gold accent -->
+    <Fragment>
+      <div class="absolute inset-0 bg-gradient-to-br from-cream to-background"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(200,148,74,0.08)_0%,_transparent_60%)]"></div>
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+    </Fragment>
+  )}
 
-      <!-- Reassurance -->
-      <p class:list={['text-sm mt-6', isDark ? 'text-white/40' : 'text-[#6B7280]']}>
-        No commitment. If we can't help, we'll tell you upfront.
-      </p>
+  <div class="relative section-spacing">
+    <div class="container-page">
+      <div class="max-w-2xl mx-auto text-center">
+
+        <!-- Gold divider -->
+        <div class="divider-gold mx-auto mb-8"></div>
+
+        <h2 class:list={[
+          'font-heading text-3xl md:text-4xl font-bold mb-5',
+          isDark ? 'text-white' : 'text-navy',
+        ]}>
+          {headline}
+        </h2>
+
+        <p class:list={[
+          'text-lg mb-10 leading-relaxed',
+          isDark ? 'text-white/50' : 'text-text-muted',
+        ]}>
+          {subtext}
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/book"
+            class="btn-gold inline-flex items-center justify-center gap-2 text-white font-semibold px-8 py-4 rounded-xl text-base"
+          >
+            {ctaLabel}
+          </a>
+          <a
+            href="/how-it-works"
+            class:list={[
+              'inline-flex items-center justify-center gap-2 font-semibold px-8 py-4 rounded-xl border transition-all duration-300 text-base',
+              isDark
+                ? 'border-white/15 text-white/70 hover:border-white/30 hover:text-white hover:bg-white/[0.04]'
+                : 'border-border text-navy hover:border-navy/40 hover:bg-white',
+            ]}
+          >
+            See how it works
+          </a>
+        </div>
+
+        <!-- Reassurance -->
+        <p class:list={[
+          'text-sm mt-8',
+          isDark ? 'text-white/30' : 'text-text-muted/60',
+        ]}>
+          No commitment. If we can't help, we'll tell you upfront.
+        </p>
+      </div>
     </div>
   </div>
 </section>

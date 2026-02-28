@@ -1,5 +1,5 @@
 ---
-// Differentiators.astro - Why choose this service + free guides section
+// Differentiators.astro - Premium why-us section with rich depth
 import servicesData from '../data/services.json';
 
 const { pillar_pages } = servicesData;
@@ -29,54 +29,82 @@ const differentiators = [
 ---
 
 <!-- Differentiators section -->
-<section id="why-us" class="section-spacing bg-[#1B3A5C] text-white border-b border-white/10">
-  <div class="container-page">
+<section id="why-us" class="relative overflow-hidden grain">
+  <!-- Layered background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-navy via-navy-mid to-[#0A1929]"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(200,148,74,0.08)_0%,_transparent_50%)]"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(200,148,74,0.05)_0%,_transparent_50%)]"></div>
 
-    <div class="text-center max-w-2xl mx-auto mb-12">
-      <h2 class="font-heading text-3xl md:text-4xl font-bold mb-4">
-        Why expats choose us
-      </h2>
-      <p class="text-white/70 text-lg">
-        When you're dealing with legal issues in a foreign country, you need more than a Google search.
-      </p>
-    </div>
+  <div class="relative section-spacing">
+    <div class="container-page">
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-      {differentiators.map(item => (
-        <div class="p-6 rounded-xl bg-white/8 border border-white/10 hover:bg-white/12 transition-all duration-200">
-          <span class="text-3xl mb-4 block" aria-hidden="true">{item.icon}</span>
-          <h3 class="font-heading font-semibold text-white text-base mb-2">{item.title}</h3>
-          <p class="text-white/60 text-sm leading-relaxed">{item.description}</p>
-        </div>
-      ))}
-    </div>
-
-    <!-- Free guides section -->
-    <div id="guides">
-      <div class="text-center max-w-2xl mx-auto mb-8">
-        <h2 class="font-heading text-2xl md:text-3xl font-bold mb-3">
-          Free guides for common situations
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <div class="divider-gold mx-auto mb-6"></div>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
+          Why expats choose us
         </h2>
-        <p class="text-white/70">
-          Start here. If you need more, book a call.
+        <p class="text-white/50 text-lg leading-relaxed">
+          When you're dealing with legal issues in a foreign country, you need more than a Google search.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
-        {pillar_pages.map(page => (
-          <a
-            href={`/${page.slug}`}
-            class="group flex items-start gap-4 p-5 rounded-xl bg-white/8 border border-white/10 hover:bg-white/15 hover:border-[#E8913A]/50 transition-all duration-200"
+      <!-- Differentiator cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-20">
+        {differentiators.map((item, i) => (
+          <div
+            class="group relative p-6 rounded-2xl bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] hover:border-gold/30 transition-all duration-400 backdrop-blur-sm"
+            style={`animation-delay: ${i * 0.1}s`}
           >
-            <span class="text-2xl shrink-0" aria-hidden="true">{page.icon}</span>
-            <div>
-              <h3 class="font-heading font-semibold text-white text-sm mb-1 group-hover:text-[#E8913A] transition-colors">
-                {page.title}
-              </h3>
-              <p class="text-white/50 text-xs leading-relaxed">{page.description}</p>
+            <!-- Icon with glow -->
+            <div class="relative mb-5">
+              <span class="text-3xl block" aria-hidden="true">{item.icon}</span>
+              <div class="absolute -inset-2 bg-gold/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
-          </a>
+            <h3 class="font-heading font-semibold text-white text-base mb-2.5 group-hover:text-gold-pale transition-colors duration-300">
+              {item.title}
+            </h3>
+            <p class="text-white/40 text-sm leading-relaxed group-hover:text-white/55 transition-colors duration-300">
+              {item.description}
+            </p>
+          </div>
         ))}
+      </div>
+
+      <!-- Free guides section -->
+      <div id="guides">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <div class="divider-gold mx-auto mb-6"></div>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-white mb-3">
+            Free guides for common situations
+          </h2>
+          <p class="text-white/50">
+            Start here. If you need more, book a call.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+          {pillar_pages.map((page, i) => (
+            <a
+              href={`/${page.slug}`}
+              class="group relative flex items-start gap-4 p-5 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] hover:border-gold/25 transition-all duration-300"
+            >
+              <!-- Guide icon -->
+              <span class="text-2xl shrink-0 w-10 h-10 flex items-center justify-center rounded-lg bg-white/[0.06]" aria-hidden="true">
+                {page.icon}
+              </span>
+              <div>
+                <h3 class="font-heading font-semibold text-white text-sm mb-1.5 group-hover:text-gold-bright transition-colors duration-300">
+                  {page.title}
+                </h3>
+                <p class="text-white/35 text-xs leading-relaxed group-hover:text-white/50 transition-colors duration-300">
+                  {page.description}
+                </p>
+              </div>
+              <!-- Arrow -->
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-white/0 group-hover:text-gold/60 transition-all duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   </div>

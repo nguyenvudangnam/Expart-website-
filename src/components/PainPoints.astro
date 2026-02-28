@@ -1,65 +1,83 @@
 ---
-// PainPoints.astro - Expat pain points section
+// PainPoints.astro - Premium pain points with elevated card design
 const painPoints = [
   {
     icon: '📄',
     title: 'Your landlord wants you to sign a contract you can\'t read',
     description: 'Vietnamese lease agreements often contain clauses that heavily favor the landlord. One wrong signature and you\'re locked in.',
+    accent: 'from-rose-500/20 to-orange-500/20',
   },
   {
     icon: '🛂',
     title: 'Your visa is expiring and you don\'t know your options',
     description: 'Overstaying or taking the wrong visa path can result in fines, bans, or forced exits. The rules change constantly.',
+    accent: 'from-amber-500/20 to-yellow-500/20',
   },
   {
     icon: '💼',
     title: 'You want to start a business but the paperwork is overwhelming',
     description: 'LLC? Representative office? Work permit? Each path has different requirements, costs, and hidden complications.',
+    accent: 'from-blue-500/20 to-cyan-500/20',
   },
   {
     icon: '🔍',
     title: 'Google gives you outdated forum posts, not real answers',
     description: 'Vietnam\'s regulations update frequently. That 2019 Expat forum post may be dangerously wrong today.',
+    accent: 'from-purple-500/20 to-pink-500/20',
   },
 ];
 ---
 
-<section id="pain-points" class="section-spacing bg-white border-b border-[#E5E7EB]">
+<section id="pain-points" class="section-spacing bg-background relative">
+  <!-- Subtle top border -->
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+
   <div class="container-page">
 
     <!-- Section header -->
-    <div class="text-center max-w-2xl mx-auto mb-12">
-      <h2 class="font-heading text-3xl md:text-4xl font-bold text-[#1B3A5C] mb-4">
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <div class="divider-gold mx-auto mb-6"></div>
+      <h2 class="font-heading text-3xl md:text-4xl font-bold text-navy mb-4">
         Sound familiar?
       </h2>
-      <p class="text-[#6B7280] text-lg">
+      <p class="text-text-muted text-lg leading-relaxed">
         Every expat hits these walls. The difference is whether you navigate them alone — or with someone who knows the system.
       </p>
     </div>
 
     <!-- Pain point grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-      {painPoints.map(point => (
-        <div class="flex gap-4 p-6 rounded-xl border border-[#E5E7EB] bg-[#FAFAF8] hover:border-[#1B3A5C]/30 transition-all duration-200">
-          <span class="text-2xl shrink-0 mt-0.5" aria-hidden="true">{point.icon}</span>
-          <div>
-            <h3 class="font-heading font-semibold text-[#1B3A5C] text-base mb-1.5 leading-snug">
-              {point.title}
-            </h3>
-            <p class="text-[#6B7280] text-sm leading-relaxed">
-              {point.description}
-            </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
+      {painPoints.map((point, i) => (
+        <div
+          class="card-premium group relative p-6 rounded-2xl border border-border-light bg-surface overflow-hidden"
+          style={`animation-delay: ${i * 0.1}s`}
+        >
+          <!-- Hover gradient accent -->
+          <div class={`absolute inset-0 bg-gradient-to-br ${point.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+
+          <div class="relative flex gap-4">
+            <span class="text-2xl shrink-0 mt-0.5 w-10 h-10 flex items-center justify-center rounded-xl bg-cream" aria-hidden="true">
+              {point.icon}
+            </span>
+            <div>
+              <h3 class="font-heading font-semibold text-navy text-base mb-2 leading-snug group-hover:text-navy transition-colors">
+                {point.title}
+              </h3>
+              <p class="text-text-muted text-sm leading-relaxed">
+                {point.description}
+              </p>
+            </div>
           </div>
         </div>
       ))}
     </div>
 
     <!-- Mid-page CTA -->
-    <div class="text-center mt-10">
-      <p class="text-[#6B7280] mb-4">Need help now? Don't wait until it's a crisis.</p>
+    <div class="text-center mt-12">
+      <p class="text-text-muted mb-5 text-sm">Need help now? Don't wait until it's a crisis.</p>
       <a
         href="/book"
-        class="inline-flex items-center gap-2 bg-[#1B3A5C] text-white font-semibold px-6 py-3 rounded-lg hover:bg-navy-800 transition-all duration-200 shadow-sm hover:shadow-md"
+        class="inline-flex items-center gap-2 bg-navy text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-navy-light transition-all duration-300 shadow-[0_4px_20px_rgba(15,35,55,0.2)] hover:shadow-[0_8px_30px_rgba(15,35,55,0.3)] hover:-translate-y-0.5"
       >
         Book a Consultation →
       </a>

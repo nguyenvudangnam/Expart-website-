@@ -1,5 +1,5 @@
 ---
-// blog/index.astro - Blog listing page
+// blog/index.astro - Premium blog listing page
 import PageLayout from '../../layouts/PageLayout.astro';
 import { getCollection } from 'astro:content';
 
@@ -12,46 +12,47 @@ const posts = allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date
   description="Practical legal tips, regulatory updates, and guides for expats living in Vietnam."
 >
 
-  <section class="section-spacing bg-[#FAFAF8]">
+  <section class="section-spacing bg-background">
     <div class="container-page">
       <div class="max-w-3xl mx-auto">
 
         <!-- Header -->
         <div class="mb-10">
-          <h1 class="font-heading text-3xl md:text-4xl font-bold text-[#1B3A5C] mb-3">Blog</h1>
-          <p class="text-[#6B7280] text-lg">
+          <div class="divider-gold mb-5"></div>
+          <h1 class="font-heading text-3xl md:text-4xl font-bold text-navy mb-3">Blog</h1>
+          <p class="text-text-muted text-lg">
             Practical tips, regulatory updates, and real-world guidance for expats in Vietnam.
           </p>
         </div>
 
         <!-- Post list -->
         {posts.length > 0 ? (
-          <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-5">
             {posts.map(post => (
               <a
                 href={`/blog/${post.id}`}
-                class="group block p-6 rounded-xl border border-[#E5E7EB] bg-white hover:border-[#1B3A5C]/30 hover:shadow-md transition-all duration-200"
+                class="card-premium group block p-6 rounded-xl border border-border-light bg-surface"
               >
                 <!-- Tags -->
                 {post.data.tags.length > 0 && (
                   <div class="flex flex-wrap gap-2 mb-3">
                     {post.data.tags.map((tag: string) => (
-                      <span class="text-xs font-medium text-[#1B3A5C] bg-[#1B3A5C]/8 px-2 py-0.5 rounded-full">
+                      <span class="text-xs font-medium text-navy bg-navy/[0.06] px-2 py-0.5 rounded-full">
                         {tag}
                       </span>
                     ))}
                   </div>
                 )}
 
-                <h2 class="font-heading text-lg font-bold text-[#1B3A5C] group-hover:text-[#E8913A] transition-colors mb-2">
+                <h2 class="font-heading text-lg font-bold text-navy group-hover:text-gold transition-colors mb-2">
                   {post.data.title}
                 </h2>
 
-                <p class="text-[#6B7280] text-sm leading-relaxed mb-3">
+                <p class="text-text-muted text-sm leading-relaxed mb-3">
                   {post.data.description}
                 </p>
 
-                <div class="flex items-center gap-3 text-xs text-[#6B7280]">
+                <div class="flex items-center gap-3 text-xs text-text-muted">
                   <time datetime={post.data.date}>
                     {new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                   </time>
@@ -63,7 +64,7 @@ const posts = allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date
           </div>
         ) : (
           <div class="text-center py-16">
-            <p class="text-[#6B7280]">No posts yet. Check back soon!</p>
+            <p class="text-text-muted">No posts yet. Check back soon!</p>
           </div>
         )}
       </div>

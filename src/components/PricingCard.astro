@@ -1,5 +1,5 @@
 ---
-// PricingCard.astro - Pricing card component
+// PricingCard.astro - Premium pricing card component
 interface Props {
   name: string;
   price: number;
@@ -16,29 +16,29 @@ const { name, price, currency, duration, description, features, cta, highlighted
 
 <div
   class:list={[
-    'relative flex flex-col p-6 rounded-xl border transition-all duration-200',
+    'relative flex flex-col p-6 rounded-2xl border transition-all duration-300',
     highlighted
-      ? 'bg-[#1B3A5C] text-white border-[#1B3A5C] shadow-lg scale-[1.02]'
-      : 'bg-white text-[#2D2D2D] border-[#E5E7EB] shadow-sm hover:shadow-md',
+      ? 'bg-gradient-to-br from-navy to-navy-mid text-white border-navy shadow-[0_8px_40px_rgba(15,35,55,0.25)] scale-[1.02]'
+      : 'bg-surface text-text-primary border-border-light shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(15,35,55,0.08)]',
   ]}
 >
   {highlighted && (
-    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#E8913A] text-white text-xs font-semibold px-3 py-1 rounded-full">
+    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-gold to-gold-bright text-white text-xs font-semibold px-4 py-1 rounded-full shadow-[0_2px_10px_rgba(200,148,74,0.3)]">
       Most Popular
     </span>
   )}
 
-  <h3 class:list={['font-heading text-xl font-bold mb-1', highlighted ? 'text-white' : 'text-[#1B3A5C]']}>
+  <h3 class:list={['font-heading text-xl font-bold mb-1', highlighted ? 'text-white' : 'text-navy']}>
     {name}
   </h3>
 
-  <p class:list={['text-sm mb-4', highlighted ? 'text-white/70' : 'text-[#6B7280]']}>
+  <p class:list={['text-sm mb-4', highlighted ? 'text-white/55' : 'text-text-muted']}>
     {description}
   </p>
 
   <div class="mb-6">
     <span class="font-mono text-4xl font-bold">${price}</span>
-    <span class:list={['text-sm ml-1', highlighted ? 'text-white/60' : 'text-[#6B7280]']}>
+    <span class:list={['text-sm ml-1', highlighted ? 'text-white/45' : 'text-text-muted']}>
       {currency} · {duration}
     </span>
   </div>
@@ -46,8 +46,8 @@ const { name, price, currency, duration, description, features, cta, highlighted
   <ul class="flex flex-col gap-2.5 mb-8 flex-1">
     {features.map(f => (
       <li class="flex items-start gap-2 text-sm">
-        <span class="text-[#059669] shrink-0 mt-0.5">✓</span>
-        <span class:list={[highlighted ? 'text-white/80' : 'text-[#2D2D2D]']}>{f}</span>
+        <span class="text-success shrink-0 mt-0.5">✓</span>
+        <span class:list={[highlighted ? 'text-white/75' : 'text-text-primary']}>{f}</span>
       </li>
     ))}
   </ul>
@@ -55,10 +55,10 @@ const { name, price, currency, duration, description, features, cta, highlighted
   <a
     href="/book"
     class:list={[
-      'text-center font-semibold py-3 px-6 rounded-lg transition-all duration-200 text-sm',
+      'text-center font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 text-sm',
       highlighted
-        ? 'bg-[#E8913A] text-white hover:bg-amber-500 shadow-sm hover:shadow-md'
-        : 'bg-[#1B3A5C] text-white hover:bg-[#1B3A5C]/90',
+        ? 'btn-gold text-white'
+        : 'bg-navy text-white hover:bg-navy-light shadow-[0_4px_15px_rgba(15,35,55,0.15)]',
     ]}
   >
     {cta} →
