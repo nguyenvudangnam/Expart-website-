@@ -1,0 +1,174 @@
+---
+// PillarLayout.astro - Template for pillar pages (renting, visa, business, etc.)
+import BaseLayout from './BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CtaBar from '../components/CtaBar.astro';
+import ReadingProgress from '../components/ReadingProgress.astro';
+import BackToTop from '../components/BackToTop.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import LeadMagnet from '../components/LeadMagnet.astro';
+import CtaSection from '../components/CtaSection.astro';
+import servicesData from '../data/services.json';
+
+interface Props {
+  title: string;
+  description: string;
+  lastUpdated: string;
+  breadcrumbLabel: string;
+  headings: { id: string; text: string; depth: number }[];
+  leadMagnet?: { title: string; description: string };
+  currentSlug: string;
+}
+
+const {
+  title,
+  description,
+  lastUpdated,
+  breadcrumbLabel,
+  headings,
+  leadMagnet,
+  currentSlug,
+} = Astro.props;
+
+// Related guides (exclude current page)
+const relatedGuides = servicesData.pillar_pages.filter(p => p.slug !== currentSlug);
+---
+
+<BaseLayout title={title} description={description}>
+  <CtaBar />
+  <Nav />
+  <ReadingProgress />
+
+  <article class="bg-[#FAFAF8] min-h-screen">
+    <div class="container-page py-8 lg:py-12">
+      <Breadcrumb items={[{ label: breadcrumbLabel }]} />
+
+      <!-- Header -->
+      <header class="max-w-3xl mb-8">
+        <h1 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-[#1B3A5C] leading-tight mb-4">
+          {title}
+        </h1>
+        <p class="text-lg text-[#6B7280] leading-relaxed mb-3">{description}</p>
+        <p class="text-xs text-[#6B7280]">Last updated: {lastUpdated}</p>
+
+        <!-- Need help now? CTA right after opening hook -->
+        <div class="mt-6 p-4 rounded-xl bg-[#E8913A]/10 border border-[#E8913A]/30">
+          <p class="text-sm text-[#2D2D2D]">
+            <strong>Need help now?</strong> Skip the reading —
+            <a href="/book" class="text-[#E8913A] font-semibold underline hover:text-amber-600 transition-colors">
+              book a 60-min call
+            </a> and get answers specific to your situation.
+          </p>
+        </div>
+      </header>
+
+      <!-- Content area with TOC sidebar -->
+      <div class="flex gap-12 items-start">
+        <!-- Main content -->
+        <div class="flex-1 min-w-0 max-w-3xl">
+
+          <!-- Mobile TOC -->
+          <TableOfContents headings={headings} />
+
+          <!-- Article content (slot from each page) -->
+          <div class="prose-content">
+            <slot />
+          </div>
+
+          <!-- Lead magnet box -->
+          {leadMagnet && (
+            <LeadMagnet title={leadMagnet.title} description={leadMagnet.description} />
+          )}
+
+          <!-- Related guides -->
+          <section class="mt-16 pt-10 border-t border-[#E5E7EB]">
+            <h2 class="font-heading text-xl font-bold text-[#1B3A5C] mb-6">Related guides</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {relatedGuides.map(guide => (
+                <a
+                  href={`/${guide.slug}`}
+                  class="flex items-start gap-3 p-4 rounded-xl border border-[#E5E7EB] bg-white hover:border-[#1B3A5C]/30 transition-all duration-200 group"
+                >
+                  <span class="text-xl shrink-0" aria-hidden="true">{guide.icon}</span>
+                  <div>
+                    <h3 class="font-semibold text-sm text-[#1B3A5C] group-hover:text-[#E8913A] transition-colors">{guide.title}</h3>
+                    <p class="text-xs text-[#6B7280] mt-0.5">{guide.description}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        </div>
+
+        <!-- Desktop TOC sidebar -->
+        <TableOfContents headings={headings} />
+      </div>
+    </div>
+  </article>
+
+  <!-- Bottom CTA -->
+  <CtaSection
+    headline="Still have questions about this topic?"
+    subtext="Book a consultation and get specific, actionable answers for your situation."
+    ctaLabel="Book a 60-Min Call — $150"
+  />
+
+  <BackToTop />
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Prose-like content styling for pillar pages */
+  .prose-content :global(h2) {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    scroll-margin-top: 5rem;
+  }
+  .prose-content :global(h3) {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1B3A5C;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    scroll-margin-top: 5rem;
+  }
+  .prose-content :global(p) {
+    color: #2D2D2D;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+  .prose-content :global(ul), .prose-content :global(ol) {
+    color: #2D2D2D;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  .prose-content :global(li) {
+    line-height: 1.75;
+    margin-bottom: 0.25rem;
+  }
+  .prose-content :global(ul li) { list-style-type: disc; }
+  .prose-content :global(ol li) { list-style-type: decimal; }
+  .prose-content :global(strong) { color: #1B3A5C; }
+  .prose-content :global(a) {
+    color: #E8913A;
+    text-decoration: underline;
+    transition: color 0.2s;
+  }
+  .prose-content :global(a:hover) { color: #1B3A5C; }
+  .prose-content :global(blockquote) {
+    border-left: 3px solid #E8913A;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: white;
+    border-radius: 0 0.75rem 0.75rem 0;
+    color: #6B7280;
+    font-style: italic;
+  }
+</style>

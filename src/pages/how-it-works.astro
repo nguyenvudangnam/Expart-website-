@@ -1,0 +1,134 @@
+---
+// how-it-works.astro - Service explanation page with steps, pricing, FAQ
+import PageLayout from '../layouts/PageLayout.astro';
+import PricingCard from '../components/PricingCard.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import CtaSection from '../components/CtaSection.astro';
+import servicesData from '../data/services.json';
+
+const steps = [
+  {
+    number: '01',
+    title: 'Choose your topic',
+    description: 'Browse our free guides for general information. If you need help specific to your situation, move to step 2.',
+    icon: '📖',
+  },
+  {
+    number: '02',
+    title: 'Book a consultation',
+    description: 'Pick a time that works for you. You\'ll get a confirmation email with a link to a brief intake form so I can prepare for our call.',
+    icon: '📅',
+  },
+  {
+    number: '03',
+    title: 'We talk through your situation',
+    description: '60 minutes of focused, plain-English guidance. I\'ll explain your options, the process, estimated costs, and timeline — specific to you.',
+    icon: '💬',
+  },
+  {
+    number: '04',
+    title: 'You get a written action plan',
+    description: 'Within 24 hours, you\'ll receive a summary email with your next steps, key documents needed, and relevant contacts if needed.',
+    icon: '✅',
+  },
+];
+---
+
+<PageLayout
+  title="How It Works"
+  description="Book a 60-minute consultation and get clear, actionable legal guidance for your situation in Vietnam. Here's exactly how the process works."
+>
+
+  <!-- Hero -->
+  <section class="section-spacing bg-[#FAFAF8] border-b border-[#E5E7EB]">
+    <div class="container-page text-center max-w-3xl mx-auto">
+      <h1 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-[#1B3A5C] mb-4">
+        How It Works
+      </h1>
+      <p class="text-lg text-[#6B7280] leading-relaxed">
+        From confusion to clarity in 4 simple steps. No commitment until you book.
+      </p>
+    </div>
+  </section>
+
+  <!-- Steps timeline -->
+  <section id="steps" class="section-spacing bg-white border-b border-[#E5E7EB]">
+    <div class="container-page max-w-3xl mx-auto">
+      <div class="flex flex-col gap-0">
+        {steps.map((step, i) => (
+          <div class="flex gap-6 relative">
+            <!-- Timeline line -->
+            <div class="flex flex-col items-center shrink-0">
+              <div class="w-12 h-12 rounded-full bg-[#1B3A5C] text-white flex items-center justify-center font-mono font-bold text-sm z-10">
+                {step.number}
+              </div>
+              {i < steps.length - 1 && (
+                <div class="w-0.5 h-full bg-[#E5E7EB] min-h-[60px]"></div>
+              )}
+            </div>
+            <!-- Content -->
+            <div class="pb-10">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-xl" aria-hidden="true">{step.icon}</span>
+                <h3 class="font-heading text-lg font-bold text-[#1B3A5C]">{step.title}</h3>
+              </div>
+              <p class="text-[#6B7280] text-sm leading-relaxed">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="section-spacing bg-[#FAFAF8] border-b border-[#E5E7EB]">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-[#1B3A5C] mb-4">
+          Simple, transparent pricing
+        </h2>
+        <p class="text-[#6B7280] text-lg">
+          No hidden fees. No retainers. Pay for what you need.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        {servicesData.pricing.map(plan => (
+          <PricingCard
+            name={plan.name}
+            price={plan.price}
+            currency={plan.currency}
+            duration={plan.duration}
+            description={plan.description}
+            features={plan.features}
+            cta={plan.cta}
+            highlighted={plan.highlighted}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section-spacing bg-white border-b border-[#E5E7EB]">
+    <div class="container-page max-w-3xl mx-auto">
+      <div class="text-center mb-10">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-[#1B3A5C] mb-4">
+          Frequently Asked Questions
+        </h2>
+        <p class="text-[#6B7280] text-lg">
+          Quick answers to common questions about the consultation process.
+        </p>
+      </div>
+
+      <FaqAccordion />
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <CtaSection
+    headline="Ready to get started?"
+    subtext="Book your consultation and get answers specific to your situation in Vietnam."
+  />
+
+</PageLayout>

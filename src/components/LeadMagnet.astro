@@ -1,0 +1,32 @@
+---
+// LeadMagnet.astro - Inline lead magnet / resource download box
+interface Props {
+  title?: string;
+  description?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+const {
+  title = "Free Checklist",
+  description = "Download our step-by-step checklist so you don't miss anything.",
+  ctaLabel = "Download PDF →",
+  ctaHref = "/resources",
+} = Astro.props;
+---
+
+<aside class="my-10 p-6 rounded-xl bg-[#1B3A5C] text-white border border-[#1B3A5C]" role="complementary">
+  <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+    <div class="flex-1">
+      <p class="text-xs font-semibold uppercase tracking-widest text-[#E8913A] mb-1">Free Resource</p>
+      <h3 class="font-heading font-semibold text-lg mb-1">{title}</h3>
+      <p class="text-white/70 text-sm">{description}</p>
+    </div>
+    <a
+      href={ctaHref}
+      class="shrink-0 inline-flex items-center gap-2 bg-[#E8913A] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-amber-500 transition-all duration-200"
+    >
+      {ctaLabel}
+    </a>
+  </div>
+</aside>

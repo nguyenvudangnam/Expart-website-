@@ -1,0 +1,141 @@
+---
+// blog/[id].astro - Individual blog post template
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import CtaBar from '../../components/CtaBar.astro';
+import BackToTop from '../../components/BackToTop.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map(post => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <CtaBar />
+  <Nav />
+
+  <article class="bg-[#FAFAF8] min-h-screen">
+    <div class="container-reading py-10 lg:py-16">
+
+      <!-- Breadcrumb -->
+      <nav class="text-sm text-[#6B7280] mb-6" aria-label="Breadcrumb">
+        <ol class="flex flex-wrap items-center gap-1.5">
+          <li><a href="/" class="hover:text-[#1B3A5C] transition-colors">Home</a></li>
+          <li class="flex items-center gap-1.5">
+            <span aria-hidden="true" class="text-[#E5E7EB]">/</span>
+            <a href="/blog" class="hover:text-[#1B3A5C] transition-colors">Blog</a>
+          </li>
+          <li class="flex items-center gap-1.5">
+            <span aria-hidden="true" class="text-[#E5E7EB]">/</span>
+            <span class="text-[#2D2D2D] font-medium truncate max-w-[200px]">{post.data.title}</span>
+          </li>
+        </ol>
+      </nav>
+
+      <!-- Header -->
+      <header class="mb-10">
+        {post.data.tags.length > 0 && (
+          <div class="flex flex-wrap gap-2 mb-4">
+            {post.data.tags.map((tag: string) => (
+              <span class="text-xs font-medium text-[#1B3A5C] bg-[#1B3A5C]/8 px-2.5 py-1 rounded-full">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <h1 class="font-heading text-3xl md:text-4xl font-bold text-[#1B3A5C] leading-tight mb-4">
+          {post.data.title}
+        </h1>
+
+        <div class="flex items-center gap-3 text-sm text-[#6B7280]">
+          <time datetime={post.data.date}>
+            {new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+          <span>·</span>
+          <span>{post.data.author}</span>
+        </div>
+      </header>
+
+      <!-- Post content -->
+      <div class="prose-content">
+        <Content />
+      </div>
+
+      <!-- Post footer -->
+      <div class="mt-12 pt-8 border-t border-[#E5E7EB]">
+        <div class="p-6 rounded-xl bg-white border border-[#E5E7EB]">
+          <p class="text-sm text-[#6B7280] mb-3">
+            <strong class="text-[#1B3A5C]">Need specific advice?</strong> This blog post covers general information. For guidance tailored to your situation, consider a consultation.
+          </p>
+          <a
+            href="/book"
+            class="inline-flex items-center gap-2 bg-[#E8913A] text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-amber-500 transition-all duration-200"
+          >
+            Book a Consultation →
+          </a>
+        </div>
+
+        <div class="mt-6 text-center">
+          <a href="/blog" class="text-[#1B3A5C] text-sm font-medium hover:text-[#E8913A] transition-colors">
+            ← Back to all posts
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <BackToTop />
+  <Footer />
+</BaseLayout>
+
+<style>
+  .prose-content :global(h2) {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1B3A5C;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .prose-content :global(h3) {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1B3A5C;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose-content :global(p) {
+    color: #2D2D2D;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+  .prose-content :global(ul), .prose-content :global(ol) {
+    color: #2D2D2D;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  .prose-content :global(li) {
+    line-height: 1.75;
+    margin-bottom: 0.25rem;
+  }
+  .prose-content :global(ul li) { list-style-type: disc; }
+  .prose-content :global(ol li) { list-style-type: decimal; }
+  .prose-content :global(strong) { color: #1B3A5C; }
+  .prose-content :global(a) {
+    color: #E8913A;
+    text-decoration: underline;
+  }
+  .prose-content :global(a:hover) { color: #1B3A5C; }
+</style>

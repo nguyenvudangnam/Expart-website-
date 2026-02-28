@@ -1,0 +1,83 @@
+---
+// TableOfContents.astro - Sticky sidebar TOC for pillar pages
+interface Props {
+  headings: { id: string; text: string; depth: number }[];
+}
+
+const { headings } = Astro.props;
+---
+
+<aside id="toc-sidebar" class="hidden lg:block sticky top-24 self-start w-56 shrink-0" aria-label="Table of contents">
+  <p class="text-xs font-semibold uppercase tracking-widest text-[#6B7280] mb-3">On this page</p>
+  <nav>
+    <ul class="flex flex-col gap-1 border-l-2 border-[#E5E7EB]">
+      {headings.map(h => (
+        <li>
+          <a
+            href={`#${h.id}`}
+            class:list={[
+              'toc-link block text-sm leading-snug py-1 transition-colors hover:text-[#1B3A5C] border-l-2 -ml-[2px]',
+              h.depth === 2 ? 'pl-4 text-[#6B7280] border-transparent' : 'pl-7 text-[#6B7280]/70 border-transparent text-xs',
+            ]}
+            data-heading-id={h.id}
+          >
+            {h.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</aside>
+
+<!-- Mobile TOC dropdown -->
+<details class="lg:hidden mb-6 border border-[#E5E7EB] rounded-xl bg-white p-4">
+  <summary class="text-sm font-semibold text-[#1B3A5C] cursor-pointer select-none">
+    📖 Table of Contents
+  </summary>
+  <nav class="mt-3">
+    <ul class="flex flex-col gap-1.5">
+      {headings.map(h => (
+        <li>
+          <a
+            href={`#${h.id}`}
+            class:list={[
+              'block text-sm text-[#6B7280] hover:text-[#1B3A5C] transition-colors',
+              h.depth === 3 ? 'pl-4 text-xs' : '',
+            ]}
+          >
+            {h.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</details>
+
+<script>
+  // Highlight active TOC link on scroll
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const headingEls = Array.from(tocLinks).map(link => {
+    const id = link.getAttribute('data-heading-id');
+    return id ? document.getElementById(id) : null;
+  }).filter(Boolean);
+
+  if (headingEls.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.remove('text-[#1B3A5C]', 'font-medium', 'border-[#E8913A]');
+            link.classList.add('border-transparent');
+          });
+          const active = document.querySelector(`.toc-link[data-heading-id="${entry.target.id}"]`);
+          if (active) {
+            active.classList.add('text-[#1B3A5C]', 'font-medium', 'border-[#E8913A]');
+            active.classList.remove('border-transparent');
+          }
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px', threshold: 0 });
+
+    headingEls.forEach(el => { if (el) observer.observe(el); });
+  }
+</script>

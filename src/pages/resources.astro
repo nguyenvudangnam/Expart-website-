@@ -1,0 +1,123 @@
+---
+// resources.astro - Free resources / lead magnets download page
+import PageLayout from '../layouts/PageLayout.astro';
+import CtaSection from '../components/CtaSection.astro';
+
+const resources = [
+  {
+    icon: '🏠',
+    title: 'Vietnam Rental Checklist',
+    description: '20-point checklist to review before signing any apartment lease in Vietnam.',
+    tags: ['Renting', 'Contracts'],
+    relatedGuide: '/renting',
+  },
+  {
+    icon: '🛂',
+    title: 'Visa Decision Flowchart',
+    description: 'Answer 5 questions and find out which Vietnam visa type fits your situation.',
+    tags: ['Visa', 'Immigration'],
+    relatedGuide: '/visa',
+  },
+  {
+    icon: '💼',
+    title: 'Business Registration Checklist',
+    description: 'Complete document checklist for registering an LLC in Vietnam as a foreigner.',
+    tags: ['Business', 'LLC'],
+    relatedGuide: '/business',
+  },
+  {
+    icon: '👨‍👩‍👧',
+    title: 'Family Document Checklist',
+    description: 'Every document needed for marriage registration and dependent visa applications.',
+    tags: ['Family', 'Documents'],
+    relatedGuide: '/family',
+  },
+  {
+    icon: '📄',
+    title: 'Document Processing Tracker',
+    description: 'Track the status, timeline, and cost of every document you need to authenticate.',
+    tags: ['Documents', 'Apostille'],
+    relatedGuide: '/documents',
+  },
+];
+---
+
+<PageLayout
+  title="Free Resources"
+  description="Free checklists, flowcharts, and trackers for expats navigating legal processes in Vietnam."
+>
+
+  <section class="section-spacing bg-[#FAFAF8] border-b border-[#E5E7EB]">
+    <div class="container-page">
+
+      <!-- Header -->
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <h1 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-[#1B3A5C] mb-4">
+          Free Resources
+        </h1>
+        <p class="text-lg text-[#6B7280] leading-relaxed">
+          Practical checklists and tools to help you navigate Vietnam's legal system. No sign-up required.
+        </p>
+      </div>
+
+      <!-- Resources grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        {resources.map(resource => (
+          <div class="p-6 rounded-xl border border-[#E5E7EB] bg-white shadow-sm hover:shadow-md transition-all duration-200">
+            <div class="flex items-start gap-4">
+              <span class="text-3xl shrink-0" aria-hidden="true">{resource.icon}</span>
+              <div class="flex-1">
+                <!-- Tags -->
+                <div class="flex gap-2 mb-2">
+                  {resource.tags.map(tag => (
+                    <span class="text-xs font-medium text-[#1B3A5C] bg-[#1B3A5C]/8 px-2 py-0.5 rounded-full">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <h2 class="font-heading text-lg font-bold text-[#1B3A5C] mb-1">{resource.title}</h2>
+                <p class="text-[#6B7280] text-sm leading-relaxed mb-4">{resource.description}</p>
+
+                <div class="flex flex-wrap gap-2">
+                  <!-- Email capture placeholder for download -->
+                  <div class="w-full p-3 rounded-lg bg-[#FAFAF8] border border-[#E5E7EB]">
+                    <p class="text-xs text-[#6B7280] mb-2">Get this resource sent to your email:</p>
+                    <form class="flex gap-2" onsubmit="return false;">
+                      <input
+                        type="email"
+                        placeholder="your@email.com"
+                        class="flex-1 text-sm px-3 py-2 rounded-lg border border-[#E5E7EB] bg-white text-[#2D2D2D] placeholder:text-[#6B7280]/60 focus:outline-none focus:border-[#E8913A]"
+                        aria-label="Email address"
+                      />
+                      <button
+                        type="submit"
+                        class="shrink-0 bg-[#1B3A5C] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-[#1B3A5C]/90 transition-all duration-200"
+                      >
+                        Send
+                      </button>
+                    </form>
+                  </div>
+
+                  <a
+                    href={resource.relatedGuide}
+                    class="text-xs text-[#E8913A] font-medium hover:underline transition-colors"
+                  >
+                    Read the full guide →
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaSection
+    headline="Need answers beyond a checklist?"
+    subtext="Book a consultation and get personalized guidance for your specific situation."
+    variant="dark"
+  />
+
+</PageLayout>

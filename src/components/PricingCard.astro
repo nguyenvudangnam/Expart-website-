@@ -1,0 +1,66 @@
+---
+// PricingCard.astro - Pricing card component
+interface Props {
+  name: string;
+  price: number;
+  currency: string;
+  duration: string;
+  description: string;
+  features: string[];
+  cta: string;
+  highlighted?: boolean;
+}
+
+const { name, price, currency, duration, description, features, cta, highlighted = false } = Astro.props;
+---
+
+<div
+  class:list={[
+    'relative flex flex-col p-6 rounded-xl border transition-all duration-200',
+    highlighted
+      ? 'bg-[#1B3A5C] text-white border-[#1B3A5C] shadow-lg scale-[1.02]'
+      : 'bg-white text-[#2D2D2D] border-[#E5E7EB] shadow-sm hover:shadow-md',
+  ]}
+>
+  {highlighted && (
+    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#E8913A] text-white text-xs font-semibold px-3 py-1 rounded-full">
+      Most Popular
+    </span>
+  )}
+
+  <h3 class:list={['font-heading text-xl font-bold mb-1', highlighted ? 'text-white' : 'text-[#1B3A5C]']}>
+    {name}
+  </h3>
+
+  <p class:list={['text-sm mb-4', highlighted ? 'text-white/70' : 'text-[#6B7280]']}>
+    {description}
+  </p>
+
+  <div class="mb-6">
+    <span class="font-mono text-4xl font-bold">${price}</span>
+    <span class:list={['text-sm ml-1', highlighted ? 'text-white/60' : 'text-[#6B7280]']}>
+      {currency} · {duration}
+    </span>
+  </div>
+
+  <ul class="flex flex-col gap-2.5 mb-8 flex-1">
+    {features.map(f => (
+      <li class="flex items-start gap-2 text-sm">
+        <span class="text-[#059669] shrink-0 mt-0.5">✓</span>
+        <span class:list={[highlighted ? 'text-white/80' : 'text-[#2D2D2D]']}>{f}</span>
+      </li>
+    ))}
+  </ul>
+
+  <a
+    href="/book"
+    class:list={[
+      'text-center font-semibold py-3 px-6 rounded-lg transition-all duration-200 text-sm',
+      highlighted
+        ? 'bg-[#E8913A] text-white hover:bg-amber-500 shadow-sm hover:shadow-md'
+        : 'bg-[#1B3A5C] text-white hover:bg-[#1B3A5C]/90',
+    ]}
+  >
+    {cta} →
+  </a>
+</div>
